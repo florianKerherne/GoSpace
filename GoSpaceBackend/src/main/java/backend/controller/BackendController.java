@@ -22,6 +22,7 @@ public class BackendController {
 	@RequestMapping(value  = "about", method = RequestMethod.GET)
 	public @ResponseBody String getInfo() {
 		LOG.info("GET called on /about");
+		setDonnees()
 		return HELLO_TEXT;
 	}
 	
