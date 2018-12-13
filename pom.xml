@@ -27,7 +27,7 @@
     </properties>
 	
 	<modules>
-        <module>GoSpace_frontend</module>
+        <module>frontend</module>
         <module>GoSpaceBackend</module>
   </modules>
 
