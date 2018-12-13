@@ -1,7 +1,7 @@
 package backend.model;
 
 import javax.persistence.*;
-
+/*
 @Entity
 @Table(name="Utilisateur")
 public class Utilisateur {
@@ -73,7 +73,7 @@ public class Utilisateur {
 		this.admin = admin;
 	}
 }
-
+*/
 
 
 
