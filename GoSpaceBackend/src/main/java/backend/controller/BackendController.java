@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//import backend.modelInterface.UtilisateurRepository;
+import backend.modelInterface.UtilisateurRepository;
 
 @RestController()
 @RequestMapping("/")
@@ -21,8 +21,8 @@ public class BackendController {
 	
 	public static final String HELLO_TEXT = "Hello from Spring Boot Backend!";
 
-	@Autowired
-   // private UtilisateurRepository userRepository;
+	//@Autowired
+    //private UtilisateurRepository userRepository;
 	
 	
 	//fonction de récuperation des informations pour Jira 

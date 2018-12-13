@@ -1,9 +1,9 @@
 package backend.model;
 
 import javax.persistence.*;
-/*
+
 @Entity
-@Table(name="Utilisateur")
+@Table(name="utilisateur")
 public class Utilisateur {
 	
 	// PrimaryKey
@@ -73,7 +73,7 @@ public class Utilisateur {
 		this.admin = admin;
 	}
 }
-*/
+
 
 
 

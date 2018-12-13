@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-//import backend.model.Utilisateur;
-//
-//public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long> {
-//
-//	List<Utilisateur> findByNom(@Param("nom") String nom);
-//
-//    List<Utilisateur> findBynom(@Param("prenom") String prenom);
-//}
+import backend.model.Utilisateur;
+
+public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long> {
+
+	List<Utilisateur> findByNom(@Param("nom") String nom);
+
+    List<Utilisateur> findBynom(@Param("prenom") String prenom);
+}
