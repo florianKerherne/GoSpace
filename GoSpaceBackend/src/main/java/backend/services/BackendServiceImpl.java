@@ -2,7 +2,7 @@ package backend.services;
 
 import org.springframework.stereotype.Service;
 
-@Service(value = "backendService")
+//@Service(value = "backendService")
 public class BackendServiceImpl implements BackendService{
 	
 //	@Resource

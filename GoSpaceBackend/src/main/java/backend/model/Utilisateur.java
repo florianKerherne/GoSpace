@@ -9,21 +9,26 @@ public class Utilisateur {
 	// PrimaryKey
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private long id;
-
+    @Column(name="nom")
     private String nom;
+    @Column(name="prenom")
     private String prenom;
+    @Column(name="email")
     private String email;
-    private String MDP;
+    @Column(name="mdp")
+    private String mdp;
+    @Column(name="admin")
     private Boolean admin;
 
-    protected Utilisateur() {}
+    /*protected Utilisateur() {}
     
     public Utilisateur(String nom, String prenom, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-    }
+    }*/
 
 	public long getId() {
 		return id;
@@ -57,12 +62,12 @@ public class Utilisateur {
 		this.email = email;
 	}
 
-	public String getMDP() {
-		return MDP;
+	public String getMdp() {
+		return mdp;
 	}
 
-	public void setMDP(String mDP) {
-		MDP = mDP;
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
 	}
 
 	public Boolean getAdmin() {

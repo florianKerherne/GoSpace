@@ -3,7 +3,9 @@
     <div id="nav">
       <router-link to="/">Bonjour</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/connexion">Connexion</router-link>
+      <router-link to="/listVoyage">Liste des voyages</router-link> | 
+      <router-link to="/connexion">Connexion</router-link> | 
+      <router-link to="/inscription">Inscription</router-link>
     </div>
     <router-view/>
   </div>

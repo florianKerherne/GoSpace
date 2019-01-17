@@ -10,6 +10,5 @@ import backend.model.Utilisateur;
 public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long> {
 
 	List<Utilisateur> findByNom(@Param("nom") String nom);
-
-    List<Utilisateur> findBynom(@Param("prenom") String prenom);
+    List<Utilisateur> findByPrenom(@Param("prenom") String prenom);
 }
