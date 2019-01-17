@@ -26,12 +26,14 @@ public class UtilisateurService implements IUtilisateurService{
 		Utilisateur obj = utilisateurRepository.findById(Id).get();
 		return obj;
 	}	
+	
 	@Override
 	public List<Utilisateur> getAllUtilisateurs(){
 		List<Utilisateur> list = new ArrayList<>();
 		utilisateurRepository.findAll().forEach(e -> list.add(e));
 		return list;
 	}
+	
 	@Override
 	public synchronized boolean addUtilisateur(Utilisateur utilisateur){
 	        List<Utilisateur> list = utilisateurRepository.findByNom(utilisateur.getNom()); 	
@@ -42,10 +44,12 @@ public class UtilisateurService implements IUtilisateurService{
     	        return true;
        }
 	}
+	
 	@Override
 	public void updateUtilisateur(Utilisateur utilisateur) {
 		utilisateurRepository.save(utilisateur);
 	}
+	
 	@Override
 	public void deleteUtilisateur(int Id) {
 		utilisateurRepository.delete(getUtilisateurById(Id));

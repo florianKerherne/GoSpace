@@ -28,36 +28,39 @@ public class UtilisateurController {
 	private IUtilisateurService utilisateurService;
 	
 	@GetMapping("utilisateur/{id}")
-	public ResponseEntity<Utilisateur> getArticleById(@PathVariable("id") Integer id) {
+	public ResponseEntity<Utilisateur> getUserById(@PathVariable("id") Integer id) {
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(id);
 		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
 	}
 	
-//	@GetMapping("articles")
-//	public ResponseEntity<List<Utilisateur>> getAllArticles() {
-//		List<Utilisateur> list = utilisateurService.getAllUtilisateurs();
-//		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
-//	}
-//	@PostMapping("article")
-//	public ResponseEntity<Void> addArticle(@RequestBody Utilisateur utilisateur, UriComponentsBuilder builder) {
-//                boolean flag = utilisateurService.addUtilisateur(utilisateur);
-//                if (flag == false) {
-//        	   return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//                }
-//                HttpHeaders headers = new HttpHeaders();
-//                headers.setLocation(builder.path("/article/{id}").buildAndExpand(utilisateur.getId()).toUri());
-//                return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-//	}
-//	@PutMapping("article")
-//	public ResponseEntity<Utilisateur> updateArticle(@RequestBody Utilisateur article) {
-//		utilisateurService.updateUtilisateur(article);
-//		return new ResponseEntity<Utilisateur>(article, HttpStatus.OK);
-//	}
-//	@DeleteMapping("article/{id}")
-//	public ResponseEntity<Void> deleteArticle(@PathVariable("id") Integer id) {
-//		utilisateurService.deleteUtilisateur(id);
-//		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//	}	
+	@GetMapping("utilisateurs")
+	public ResponseEntity<List<Utilisateur>> getAllUsers() {
+		List<Utilisateur> list = utilisateurService.getAllUtilisateurs();
+		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
+	}
+	
+	@PostMapping("utilisateur")
+	public ResponseEntity<Void> addUser(@RequestBody Utilisateur utilisateur, UriComponentsBuilder builder) {
+                boolean flag = utilisateurService.addUtilisateur(utilisateur);
+                if (flag == false) {
+                	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+                }
+                HttpHeaders headers = new HttpHeaders();
+                headers.setLocation(builder.path("/article/{id}").buildAndExpand(utilisateur.getId()).toUri());
+                return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+	}
+	
+	@PutMapping("utilisateur")
+	public ResponseEntity<Utilisateur> updateUser(@RequestBody Utilisateur utilisateur) {
+		utilisateurService.updateUtilisateur(utilisateur);
+		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("utilisateur/{id}")
+	public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
+		utilisateurService.deleteUtilisateur(id);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}	
 
 }
 
