@@ -20,7 +20,7 @@
                       label-for="InputLastName">
          <b-form-input id="InputLastName"
                         type="text"
-                        v-model="form.name"
+                        v-model="form.nom"
                         required
                         placeholder="Enter last name">
           </b-form-input>
@@ -31,7 +31,7 @@
                       label-for="InputName">
          <b-form-input id="InputFirstName"
                         type="text"
-                        v-model="form.name"
+                        v-model="form.prenom"
                         required
                         placeholder="Enter first name">
           </b-form-input>
@@ -42,7 +42,7 @@
                       label-for="InputPassword">
           <b-form-input id="InputPassword"
                         type="password"
-                        v-model="form.name"
+                        v-model="form.mdp"
                         required
                         placeholder="password">
           </b-form-input>
@@ -53,14 +53,13 @@
                       label-for="InputPasswordConfirm">
           <b-form-input id="InputPasswordConfirm"
                         type="password"
-                        v-model="form.name"
                         required
                         placeholder="password">
           </b-form-input>
         </b-form-group>
 
         <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">J'accepte les condition d'utilisation</b-form-checkbox>
-        <b-button variant="primary" @click="callConnexion()">Inscription</b-button>
+        <b-button variant="primary" @click="callInscription()">Inscription</b-button>
       </b-form>
     </div>
   </div>
@@ -79,18 +78,32 @@ export default {
       errors: [],
       form: {
         email: '',
-        password: ''
+        nom: '',
+        prenom: '',
+        mdp: '',
+        isAdmin: false
       },
       show: true
     };
   },
   methods: {
     // Fetches posts when the component is created.
-    callConnexion() {
-      AXIOS.get(`connexion`)
+    callInscription() {
+      AXIOS.get(`utilisateur/1`)
         .then(response => {
           // JSON responses are automatically parsed.
-          this.posts = response.result;
+          console.log(response.data)
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
+    callInscription2() {
+      AXIOS.post(`utilisateur`, {
+        utilisateur : this.form
+      })
+        .then(response => {
+          // JSON responses are automatically parsed.
         })
         .catch(e => {
           this.errors.push(e);
