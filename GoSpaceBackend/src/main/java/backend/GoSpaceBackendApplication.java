@@ -10,12 +10,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-<<<<<<< Upstream, based on branch 'master' of https://github.com/florianKerherne/GoSpace.git
 @ComponentScan(basePackages = "backend.*")
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-=======
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
->>>>>>> 507c81f clean backend
 public class GoSpaceBackendApplication implements WebMvcConfigurer {
 	
 	public static void main(String[] args) {

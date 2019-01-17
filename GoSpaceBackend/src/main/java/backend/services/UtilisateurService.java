@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import backend.model.Utilisateur;
-import backend.modelInterface.UtilisateurRepository;
+import backend.repository.UtilisateurRepository;
 
 @Service("IUtilisateurService")
-@Transactional
 public class UtilisateurService implements IUtilisateurService{
 
 	@Autowired

@@ -3,11 +3,12 @@ package backend.repository;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
 import backend.model.Utilisateur;
 
-public interface UtilisateurRepository extends CrudRepository<Utilisateur, Integer> {
+public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long> {
 
-	List<Utilisateur> findByNom(String nom);
-	
-    List<Utilisateur> findByPrenom(String prenom);
+	List<Utilisateur> findByNom(@Param("nom") String nom);
+    List<Utilisateur> findByPrenom(@Param("prenom") String prenom);
 }

@@ -1,35 +1,31 @@
 package backend.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="utilisateur")
-public class Utilisateur {
+public class Utilisateur implements Serializable {
 	
 	// PrimaryKey
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-<<<<<<< Upstream, based on branch 'master' of https://github.com/florianKerherne/GoSpace.git
     @Column(name="id")
-    private long id;
-    @Column(name="nom")
-=======
     private Integer id;
 
->>>>>>> 507c81f clean backend
     private String nom;
     @Column(name="prenom")
     private String prenom;
-    @Column(name="email")
-    private String email;
-<<<<<<< Upstream, based on branch 'master' of https://github.com/florianKerherne/GoSpace.git
+    
     @Column(name="mdp")
     private String mdp;
-    @Column(name="admin")
-=======
-    private String mdp;
->>>>>>> 507c81f clean backend
-    private Boolean admin;
+    
+    @Column(name="email")
+    private String email;
+    
+    @Column(name="isAdmin")
+    private Boolean isAdmin;
 
     /*protected Utilisateur() {}
     
@@ -71,29 +67,20 @@ public class Utilisateur {
 		this.email = email;
 	}
 
-<<<<<<< Upstream, based on branch 'master' of https://github.com/florianKerherne/GoSpace.git
-	public String getMdp() {
-=======
 	public String getMDP() {
->>>>>>> 507c81f clean backend
 		return mdp;
 	}
 
-<<<<<<< Upstream, based on branch 'master' of https://github.com/florianKerherne/GoSpace.git
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-=======
 	public void setMDP(String mDP) {
 		mdp = mDP;
->>>>>>> 507c81f clean backend
 	}
 
 	public Boolean getAdmin() {
-		return admin;
+		return isAdmin;
 	}
 
 	public void setAdmin(Boolean admin) {
-		this.admin = admin;
+		this.isAdmin = admin;
 	}
 }
 
