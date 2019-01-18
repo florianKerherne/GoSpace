@@ -1,14 +1,29 @@
 package backend.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="lieu")
 public class Lieu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+    @Column(name="planete")
+	private String planete;
+    
+    @Column(name="nom")
+	private String nom;
+    
+    @Column(name="description")
+	private String description;
+
 
 	public Integer getId() {
 		return id;
@@ -41,9 +56,5 @@ public class Lieu {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	private String planete;
-	private String nom;
-	private String description;
 
 }

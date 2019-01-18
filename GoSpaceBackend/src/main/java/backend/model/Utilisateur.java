@@ -13,8 +13,10 @@ public class Utilisateur implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Integer id;
-
+    
+    @Column(name="nom")
     private String nom;
+    
     @Column(name="prenom")
     private String prenom;
     
@@ -84,7 +86,6 @@ public class Utilisateur implements Serializable {
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-
 
 }
 

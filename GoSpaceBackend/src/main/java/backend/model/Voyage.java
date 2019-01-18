@@ -2,44 +2,53 @@ package backend.model;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "voyage")
 public class Voyage {
-
-	// PrimaryKey
-	@Id
+	
+	@Id // PrimaryKey
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	//Manque le id_Lieu (foreingn key)
+	//foreingn key
+	@ManyToOne
+	@JoinColumn(name = "id_lieu")
+	private Lieu id_lieu;
 	
-	private Integer nbPlacesRestantes;
+	@Column(name="nb_places_restantes")
+	private Integer nb_places_restantes;
+	
+	@Column(name="prix")
 	private float prix;
+	
+	@Column(name="promotion")
 	private float promotion;
+	
+	@Column(name="description")
 	private String description;
-	private Calendar dateDebut;
-	private Calendar dateFin;
+	
+	@Column(name="date_debut")
+	private Calendar date_debut;
+	
+	@Column(name="date_fin")
+	private Calendar date_fin;
 
+	
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getNbPlacesRestantes() {
-		return nbPlacesRestantes;
-	}
-
-	public void setNbPlacesRestantes(Integer nbPlacesRestantes) {
-		this.nbPlacesRestantes = nbPlacesRestantes;
 	}
 
 	public float getPrix() {
@@ -66,20 +75,36 @@ public class Voyage {
 		this.description = description;
 	}
 
-	public Calendar getDateDebut() {
-		return dateDebut;
+	public Lieu getId_lieu() {
+		return id_lieu;
 	}
 
-	public void setDateDebut(Calendar dateDebut) {
-		this.dateDebut = dateDebut;
+	public void setId_lieu(Lieu id_lieu) {
+		this.id_lieu = id_lieu;
 	}
 
-	public Calendar getDateFin() {
-		return dateFin;
+	public Integer getNb_places_restantes() {
+		return nb_places_restantes;
 	}
 
-	public void setDateFin(Calendar dateFin) {
-		this.dateFin = dateFin;
+	public void setNb_places_restantes(Integer nb_places_restantes) {
+		this.nb_places_restantes = nb_places_restantes;
+	}
+
+	public Calendar getDate_debut() {
+		return date_debut;
+	}
+
+	public void setDate_debut(Calendar date_debut) {
+		this.date_debut = date_debut;
+	}
+
+	public Calendar getDate_fin() {
+		return date_fin;
+	}
+
+	public void setDate_fin(Calendar date_fin) {
+		this.date_fin = date_fin;
 	}
 
 }
