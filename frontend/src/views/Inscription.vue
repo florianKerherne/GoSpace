@@ -53,11 +53,12 @@
             v-model="mdp2"
             required
             placeholder="password"
+            ref="mdpConfirme"
           ></b-form-input>
         </b-form-group>
 
         <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">J'accepte les condition d'utilisation</b-form-checkbox>
-        <b-button variant="primary" type="submit" @click="createUser()">Inscription</b-button>
+        <b-button variant="primary" type="submit">Inscription</b-button>
       </b-form>
     </div>
   </div>
@@ -93,7 +94,7 @@ export default {
         prenom: this.user.prenom,
         email: this.user.email,
         mdp: this.user.mdp,
-        isAdmin: this.isAdmin
+        isAdmin: this.user.isAdmin
       };
 
       AXIOS.post(`/utilisateur`, params)
@@ -119,15 +120,19 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       if (this.mdp2 != this.user.mdp) {
+        alert('Mot de passe de confirmation invalide');
+        this.$refs.mdpConfirme.$el.focus()
         return false;
+      } else {
+        this.createUser();
       }
-      alert(JSON.stringify(this.form));
+      /*alert(JSON.stringify(this.user));*/
     },
     onReset(evt) {
       evt.preventDefault();
       /* Reset our form values */
-      this.form.email = "";
-      this.form.password = "";
+      this.user.email = "";
+      this.user.password = "";
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
@@ -142,6 +147,7 @@ export default {
   color: #eb0606;
 }
 #app {
+  padding: 30px;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
