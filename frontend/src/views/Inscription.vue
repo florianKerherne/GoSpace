@@ -9,6 +9,7 @@
             v-model="user.email"
             required
             placeholder="Enter email"
+            ref="email"
           ></b-form-input>
         </b-form-group>
 
@@ -75,6 +76,7 @@ export default {
     return {
       posts: [],
       errors: [],
+      booleanUserExist: false,
       mdp2: "",
       user: {
         email: "",
@@ -107,10 +109,28 @@ export default {
           this.errors.push(e);
         });
     },
-    callInscription() {
-      AXIOS.get(`utilisateur/toto`)
+    checkPassword() {
+      if (this.mdp2 != this.user.mdp) {
+        alert('Mot de passe de confirmation invalide');
+        this.$refs.mdpConfirme.$el.focus()
+        return false;
+      } else {
+        return true;
+      }
+    },
+    userExist() {
+      AXIOS.get(`/utilisateurExist`,this.user.email)
         .then(response => {
           // JSON responses are automatically parsed.
+          //this.booleanUserExist = response.data
+          if(response.data){
+            alert('Adresse email déja utilisé');
+            this.$refs.email.$el.focus()
+            return false;
+          } else {
+            return true;
+          }
+          
           console.log(response.data);
         })
         .catch(e => {
@@ -119,12 +139,11 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
-      if (this.mdp2 != this.user.mdp) {
-        alert('Mot de passe de confirmation invalide');
-        this.$refs.mdpConfirme.$el.focus()
-        return false;
-      } else {
-        this.createUser();
+      if (this.checkPassword()) {
+        if(this.userExist()){
+          this.createUser();
+        }
+        
       }
       /*alert(JSON.stringify(this.user));*/
     },

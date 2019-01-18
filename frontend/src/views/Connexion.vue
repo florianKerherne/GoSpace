@@ -3,13 +3,13 @@
 
   <div class="connexion">
     <div id="app">
-      <b-form>
+      <b-form @submit="onSubmit">
         <b-form-group id="exampleInputGroup1"
                       label="Email adresse:"
                       label-for="exampleInput1">
           <b-form-input id="exampleInput1"
                         type="email"
-                        v-model="form.email"
+                        v-model="user.email"
                         required
                         placeholder="Enter email">
           </b-form-input>
@@ -19,13 +19,13 @@
                       label-for="exampleInput2">
           <b-form-input id="exampleInput2"
                         type="password"
-                        v-model="form.name"
+                        v-model="user.name"
                         required
                         placeholder="password">
           </b-form-input>
         </b-form-group>
         <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">Remember me</b-form-checkbox>
-        <b-button variant="primary" @click="callConnexion()">Connexion</b-button>
+        <b-button variant="primary" type="submit" >Connexion</b-button>
       </b-form>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
     return {
       posts: [],
       errors: [],
-      form: {
+      user: {
         email: '',
         password: ''
       },
@@ -52,10 +52,9 @@ export default {
   methods: {
     // Fetches posts when the component is created.
     callConnexion() {
-      AXIOS.get(`connexion`)
+      AXIOS.get(`/connexion/{email}/{mdp}`)
         .then(response => {
-          // JSON responses are automatically parsed.
-          this.posts = response.result;
+          alert(response.data);
         })
         .catch(e => {
           this.errors.push(e);
@@ -63,13 +62,14 @@ export default {
     },
     onSubmit (evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.callConnexion();
+      alert(JSON.stringify(this.user));
     },
     onReset (evt) {
       evt.preventDefault();
       /* Reset our form values */
-      this.form.email = '';
-      this.form.password = '';
+      this.user.email = '';
+      this.user.password = '';
       this.show = false;
       this.$nextTick(() => { this.show = true });
     }
