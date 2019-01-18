@@ -24,5 +24,30 @@ public class Photo {
 	
 	@Column(name="data")
 	private String data;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Lieu getId_lieu() {
+		return id_lieu;
+	}
+
+	public void setId_lieu(Lieu id_lieu) {
+		this.id_lieu = id_lieu;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+	
 	
 }

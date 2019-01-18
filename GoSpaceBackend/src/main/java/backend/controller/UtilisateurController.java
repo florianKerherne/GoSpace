@@ -2,6 +2,8 @@ package backend.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,8 @@ import backend.services.IUtilisateurService;
 @RequestMapping("/")
 public class UtilisateurController {
 
+	private static final Logger LOG = LoggerFactory.getLogger(BackendController.class);
+	
 	@Autowired
 	private IUtilisateurService utilisateurService;
 	
@@ -47,7 +51,8 @@ public class UtilisateurController {
 	
 	@PostMapping("utilisateur")
 	public ResponseEntity<Void> addUser(@RequestBody Utilisateur utilisateur, UriComponentsBuilder builder) {
-                boolean flag = utilisateurService.addUtilisateur(utilisateur);
+				LOG.info("GET called on addUser");        
+				boolean flag = utilisateurService.addUtilisateur(utilisateur);
                 if (flag == false) {
                 	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
                 }
