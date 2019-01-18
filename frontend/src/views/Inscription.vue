@@ -1,7 +1,7 @@
 <template>
   <div class="inscription">
     <div id="app">
-      <b-form>
+      <b-form @submit="onSubmit">
         <b-form-group id="InputEmailGroup" label="Email address:" label-for="InputEmail">
           <b-form-input
             id="InputEmail"
@@ -47,11 +47,17 @@
           label="Password confirm:"
           label-for="InputPasswordConfirm"
         >
-          <b-form-input id="InputPasswordConfirm" type="password" required placeholder="password"></b-form-input>
+          <b-form-input
+            id="InputPasswordConfirm"
+            type="password"
+            v-model="mdp2"
+            required
+            placeholder="password"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">J'accepte les condition d'utilisation</b-form-checkbox>
-        <b-button variant="primary" @click="createUser()">Inscription</b-button>
+        <b-button variant="primary" type="submit" @click="createUser()">Inscription</b-button>
       </b-form>
     </div>
   </div>
@@ -68,6 +74,7 @@ export default {
     return {
       posts: [],
       errors: [],
+      mdp2: "",
       user: {
         email: "",
         nom: "",
@@ -111,6 +118,9 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
+      if (this.mdp2 != this.user.mdp) {
+        return false;
+      }
       alert(JSON.stringify(this.form));
     },
     onReset(evt) {
