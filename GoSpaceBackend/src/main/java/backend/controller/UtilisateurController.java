@@ -52,7 +52,7 @@ public class UtilisateurController {
 		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("utilisateurExist")
+	@GetMapping("utilisateurExist/{email}")
 	public ResponseEntity<Boolean> userExist(@PathVariable("email") String email) {
 		LOG.info("GET called on userExist"); 
 		Boolean exist = utilisateurService.userExist(email);
