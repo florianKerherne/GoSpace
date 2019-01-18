@@ -52,8 +52,8 @@ public class UtilisateurController {
 		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("utilisateurExist")
-	public ResponseEntity<Boolean> userExist(@RequestBody String email) {
+	@GetMapping("utilisateurExist/{email}")
+	public ResponseEntity<Boolean> userExist(@PathVariable("email") String email) {
 		LOG.info("GET called on userExist"); 
 		Boolean exist = utilisateurService.userExist(email);
 		return new ResponseEntity<Boolean>(exist, HttpStatus.OK);
@@ -67,7 +67,7 @@ public class UtilisateurController {
                 	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
                 }
                 HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(builder.path("/article/{id}").buildAndExpand(utilisateur.getId()).toUri());
+                headers.setLocation(builder.path("/utilisateur/{id}").buildAndExpand(utilisateur.getId()).toUri());
                 return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
