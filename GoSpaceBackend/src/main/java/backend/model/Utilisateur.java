@@ -24,7 +24,7 @@ public class Utilisateur implements Serializable {
     @Column(name="email")
     private String email;
     
-    @Column(name="isAdmin")
+    @Column(name="is_admin")
     private Boolean isAdmin;
 
     protected Utilisateur() {}

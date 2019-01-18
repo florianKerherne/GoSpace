@@ -6,7 +6,7 @@
           <b-form-input
             id="InputEmail"
             type="email"
-            v-model="form.email"
+            v-model="user.email"
             required
             placeholder="Enter email"
           ></b-form-input>
@@ -16,7 +16,7 @@
           <b-form-input
             id="InputLastName"
             type="text"
-            v-model="form.nom"
+            v-model="user.nom"
             required
             placeholder="Enter last name"
           ></b-form-input>
@@ -26,7 +26,7 @@
           <b-form-input
             id="InputFirstName"
             type="text"
-            v-model="form.prenom"
+            v-model="user.prenom"
             required
             placeholder="Enter first name"
           ></b-form-input>
@@ -36,7 +36,7 @@
           <b-form-input
             id="InputPassword"
             type="password"
-            v-model="form.mdp"
+            v-model="user.mdp"
             required
             placeholder="password"
           ></b-form-input>
@@ -51,7 +51,7 @@
         </b-form-group>
 
         <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">J'accepte les condition d'utilisation</b-form-checkbox>
-        <b-button variant="primary" @click="callInscription()">Inscription</b-button>
+        <b-button variant="primary" @click="createUser()">Inscription</b-button>
       </b-form>
     </div>
   </div>
@@ -68,32 +68,39 @@ export default {
     return {
       posts: [],
       errors: [],
-      form: {
+      user: {
         email: "",
         nom: "",
         prenom: "",
         mdp: "",
-        isAdmin: false
+        isAdmin: false,
+        id: 0
       },
       show: true
     };
   },
   methods: {
-    // Fetches posts when the component is created.
-    callInscription() {
-      AXIOS.get(`utilisateur/toto`)
+    createUser() {
+      var params = {
+        nom: this.user.nom,
+        prenom: this.user.prenom,
+        email: this.user.email,
+        mdp: this.user.mdp,
+        isAdmin: this.isAdmin
+      };
+
+      AXIOS.post(`/utilisateur`, params)
         .then(response => {
-          // JSON responses are automatically parsed.
+          this.response = response.data;
+          this.user.id = response.data;
           console.log(response.data);
         })
         .catch(e => {
           this.errors.push(e);
         });
     },
-    callInscription2() {
-      AXIOS.post(`utilisateur`, {
-        utilisateur: this.form
-      })
+    callInscription() {
+      AXIOS.get(`utilisateur/toto`)
         .then(response => {
           // JSON responses are automatically parsed.
           console.log(response.data);
