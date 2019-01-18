@@ -63,7 +63,7 @@ public class UtilisateurService implements IUtilisateurService{
 
 	@Override
 	public boolean userExist(String email) {
-		return utilisateurRepository.existByEmail(email);
+		return utilisateurRepository.existsByEmail(email);
 	}
 
 }
