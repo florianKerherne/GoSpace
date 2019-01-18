@@ -31,22 +31,32 @@ public class UtilisateurController {
 	@Autowired
 	private IUtilisateurService utilisateurService;
 	
-//	@GetMapping("utilisateur/{id}")
-//	public ResponseEntity<Utilisateur> getUserById(@PathVariable("id") Integer id) {
-//		Utilisateur utilisateur = utilisateurService.getUtilisateurById(id);
-//		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
-//	}
-	
-	@GetMapping("utilisateur/{nom}")
-	public ResponseEntity<List<Utilisateur>> getUserByNom(@PathVariable("nom") String nom) {
-		List<Utilisateur> list  = utilisateurService.getUtilisateurByNom(nom);
-		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
+	@GetMapping("utilisateur/{id}")
+	public ResponseEntity<Utilisateur> getUserById(@PathVariable("id") Integer id) {
+		LOG.info("GET called on getUserById"); 
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(id);
+		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
 	}
+	
+//	@GetMapping("utilisateur/{nom}")
+//	public ResponseEntity<List<Utilisateur>> getUserByNom(@PathVariable("nom") String nom) {
+//		LOG.info("GET called on userExist"); 
+//		List<Utilisateur> list  = utilisateurService.getUtilisateurByNom(nom);
+//		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
+//	}
 	
 	@GetMapping("utilisateurs")
 	public ResponseEntity<List<Utilisateur>> getAllUsers() {
+		LOG.info("GET called on getAllUsers"); 
 		List<Utilisateur> list = utilisateurService.getAllUtilisateurs();
 		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("utilisateurExist")
+	public ResponseEntity<Boolean> userExist(@PathVariable("email") String email) {
+		LOG.info("GET called on userExist"); 
+		Boolean exist = utilisateurService.userExist(email);
+		return new ResponseEntity<Boolean>(exist, HttpStatus.OK);
 	}
 	
 	@PostMapping("utilisateur")
@@ -63,12 +73,14 @@ public class UtilisateurController {
 	
 	@PutMapping("utilisateur")
 	public ResponseEntity<Utilisateur> updateUser(@RequestBody Utilisateur utilisateur) {
+		LOG.info("GET called on updateUser");  
 		utilisateurService.updateUtilisateur(utilisateur);
 		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("utilisateur/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
+		LOG.info("GET called on deleteUser");  
 		utilisateurService.deleteUtilisateur(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}	

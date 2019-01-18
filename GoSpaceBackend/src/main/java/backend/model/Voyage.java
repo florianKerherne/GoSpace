@@ -22,10 +22,10 @@ public class Voyage {
 	//foreingn key
 	@ManyToOne
 	@JoinColumn(name = "id_lieu")
-	private Lieu id_lieu;
+	private Lieu idLieu;
 	
 	@Column(name="nb_places_restantes")
-	private Integer nb_places_restantes;
+	private Integer nbPlacesRestantes;
 	
 	@Column(name="prix")
 	private float prix;
@@ -37,10 +37,10 @@ public class Voyage {
 	private String description;
 	
 	@Column(name="date_debut")
-	private Calendar date_debut;
-	
+	private Calendar dateDebut;
+
 	@Column(name="date_fin")
-	private Calendar date_fin;
+	private Calendar dateFin;
 
 	
 	public Integer getId() {
@@ -76,35 +76,35 @@ public class Voyage {
 	}
 
 	public Lieu getId_lieu() {
-		return id_lieu;
+		return idLieu;
 	}
 
 	public void setId_lieu(Lieu id_lieu) {
-		this.id_lieu = id_lieu;
+		this.idLieu = id_lieu;
 	}
 
 	public Integer getNb_places_restantes() {
-		return nb_places_restantes;
+		return nbPlacesRestantes;
 	}
 
 	public void setNb_places_restantes(Integer nb_places_restantes) {
-		this.nb_places_restantes = nb_places_restantes;
+		this.nbPlacesRestantes = nb_places_restantes;
 	}
 
 	public Calendar getDate_debut() {
-		return date_debut;
+		return dateDebut;
 	}
 
 	public void setDate_debut(Calendar date_debut) {
-		this.date_debut = date_debut;
+		this.dateDebut = date_debut;
 	}
 
 	public Calendar getDate_fin() {
-		return date_fin;
+		return dateFin;
 	}
 
 	public void setDate_fin(Calendar date_fin) {
-		this.date_fin = date_fin;
+		this.dateFin = date_fin;
 	}
 
 }

@@ -8,6 +8,7 @@ public interface IUtilisateurService {
 	 Utilisateur getUtilisateurById(long Id);
 	 List<Utilisateur> getUtilisateurByNom(String nom);
      boolean addUtilisateur(Utilisateur utilisateur);
+     boolean userExist(String email);
      void updateUtilisateur(Utilisateur utilisateur);
      void deleteUtilisateur(int Id);
 }

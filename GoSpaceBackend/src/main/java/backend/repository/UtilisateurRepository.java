@@ -11,4 +11,7 @@ public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long>
 
 	List<Utilisateur> findByNom(@Param("nom") String nom);
     List<Utilisateur> findByPrenom(@Param("prenom") String prenom);
+	List<Utilisateur> findByEmail(@Param("email") String email);
+	Boolean existByEmail(@Param("email") String email);
+
 }

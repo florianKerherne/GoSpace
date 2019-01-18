@@ -42,7 +42,7 @@ public class UtilisateurService implements IUtilisateurService{
 	
 	@Override
 	public synchronized boolean addUtilisateur(Utilisateur utilisateur){
-	        List<Utilisateur> list = utilisateurRepository.findByNom(utilisateur.getNom()); 	
+	        List<Utilisateur> list = utilisateurRepository.findByEmail(utilisateur.getEmail()); 	
                 if (list.size() > 0) {
     	           return false;
                 } else {
@@ -59,6 +59,11 @@ public class UtilisateurService implements IUtilisateurService{
 	@Override
 	public void deleteUtilisateur(int Id) {
 		utilisateurRepository.delete(getUtilisateurById(Id));
+	}
+
+	@Override
+	public boolean userExist(String email) {
+		return utilisateurRepository.existByEmail(email);
 	}
 
 }
