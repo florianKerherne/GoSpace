@@ -1,10 +1,7 @@
 package backend.services;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import backend.model.Voyage;
-import backend.repository.VoyageRepository;
-
 
 public interface IVoyageService {
 	
