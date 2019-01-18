@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import backend.model.Utilisateur;
+import backend.repository.UtilisateurRepository;
 import backend.services.IUtilisateurService;
 
 @RestController()
@@ -27,10 +27,16 @@ public class UtilisateurController {
 	@Autowired
 	private IUtilisateurService utilisateurService;
 	
-	@GetMapping("utilisateur/{id}")
-	public ResponseEntity<Utilisateur> getUserById(@PathVariable("id") Integer id) {
-		Utilisateur utilisateur = utilisateurService.getUtilisateurById(id);
-		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
+//	@GetMapping("utilisateur/{id}")
+//	public ResponseEntity<Utilisateur> getUserById(@PathVariable("id") Integer id) {
+//		Utilisateur utilisateur = utilisateurService.getUtilisateurById(id);
+//		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
+//	}
+	
+	@GetMapping("utilisateur/{nom}")
+	public ResponseEntity<List<Utilisateur>> getUserByNom(@PathVariable("nom") String nom) {
+		List<Utilisateur> list  = utilisateurService.getUtilisateurByNom(nom);
+		return new ResponseEntity<List<Utilisateur>>(list, HttpStatus.OK);
 	}
 	
 	@GetMapping("utilisateurs")

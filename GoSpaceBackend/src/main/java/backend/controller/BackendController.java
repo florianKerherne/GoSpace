@@ -23,7 +23,7 @@ public class BackendController {
 	
 	public static final String HELLO_TEXT = "Hello from Spring Boot Backend!";
 	
-	//fonction de récuperation des informations pour Jira 
+	//fonction de récuperation des information
 	@RequestMapping(value  = "about", method = RequestMethod.GET)
 	public @ResponseBody String getInfo() {
 		LOG.info("GET called on /about");
@@ -35,18 +35,7 @@ public class BackendController {
 		LOG.info("GET called on default");
 		return HELLO_TEXT;
 	}
-	
-//	@GetMapping("utilisateur/{id}")
-//	public ResponseEntity<Utilisateur> getArticleById(@PathVariable("id") Integer id) {
-//		Utilisateur utilisateur = utilisateurService.getUtilisateurById(id);
-//		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
-//	}
 
-//	@GetMapping(path="/user/{id}")
-//    public @ResponseBody Utilisateur getUserById(@PathVariable("id") long id) {
-//        LOG.info("Reading user with id " + id + " from database.");
-//        return userRepository.findById(id).get();
-//    }
 }
 
 

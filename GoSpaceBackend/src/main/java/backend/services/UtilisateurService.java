@@ -28,6 +28,12 @@ public class UtilisateurService implements IUtilisateurService{
 	}	
 	
 	@Override
+	public List<Utilisateur> getUtilisateurByNom(String nom) {
+		List<Utilisateur> list = utilisateurRepository.findByNom(nom); 
+		return list;
+	}
+	
+	@Override
 	public List<Utilisateur> getAllUtilisateurs(){
 		List<Utilisateur> list = new ArrayList<>();
 		utilisateurRepository.findAll().forEach(e -> list.add(e));
@@ -54,4 +60,5 @@ public class UtilisateurService implements IUtilisateurService{
 	public void deleteUtilisateur(int Id) {
 		utilisateurRepository.delete(getUtilisateurById(Id));
 	}
+
 }

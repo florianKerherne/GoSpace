@@ -27,13 +27,15 @@ public class Utilisateur implements Serializable {
     @Column(name="isAdmin")
     private Boolean isAdmin;
 
-    /*protected Utilisateur() {}
+    protected Utilisateur() {}
     
-    public Utilisateur(String nom, String prenom, String email) {
+    public Utilisateur(String nom, String prenom, String email, String mdp, boolean isAdmin) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-    }*/
+        this.mdp = mdp;
+        this.isAdmin = false;
+    }
 
 	public Integer getId() {
 		return id;
@@ -75,13 +77,15 @@ public class Utilisateur implements Serializable {
 		mdp = mDP;
 	}
 
-	public Boolean getAdmin() {
+	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(Boolean admin) {
-		this.isAdmin = admin;
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
+
+
 }
 
 
