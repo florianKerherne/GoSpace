@@ -59,6 +59,13 @@ public class UtilisateurController {
 		return new ResponseEntity<Boolean>(exist, HttpStatus.OK);
 	}
 	
+	@GetMapping("utilisateurExist")
+	public ResponseEntity<Boolean> login(@RequestBody Utilisateur utilisateur) {
+		LOG.info("GET called on login"); 
+		Boolean exist = utilisateurService.login(utilisateur.getEmail(), utilisateur.getMDP());
+		return new ResponseEntity<Boolean>(exist, HttpStatus.OK);
+	}
+	
 	@PostMapping("utilisateur")
 	public ResponseEntity<Void> addUser(@RequestBody Utilisateur utilisateur, UriComponentsBuilder builder) {
 				LOG.info("GET called on addUser");        

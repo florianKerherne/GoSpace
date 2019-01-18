@@ -16,46 +16,46 @@ public class UtilisateurService implements IUtilisateurService{
 
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
-	
+
 	public UtilisateurService() {
 		System.out.println("CREE");
 	}
-	
+
 	@Override
 	public Utilisateur getUtilisateurById(long Id) {
 		Utilisateur obj = utilisateurRepository.findById(Id).get();
 		return obj;
 	}	
-	
+
 	@Override
 	public List<Utilisateur> getUtilisateurByNom(String nom) {
 		List<Utilisateur> list = utilisateurRepository.findByNom(nom); 
 		return list;
 	}
-	
+
 	@Override
 	public List<Utilisateur> getAllUtilisateurs(){
 		List<Utilisateur> list = new ArrayList<>();
 		utilisateurRepository.findAll().forEach(e -> list.add(e));
 		return list;
 	}
-	
+
 	@Override
 	public synchronized boolean addUtilisateur(Utilisateur utilisateur){
-	        List<Utilisateur> list = utilisateurRepository.findByEmail(utilisateur.getEmail()); 	
-                if (list.size() > 0) {
-    	           return false;
-                } else {
-                	utilisateurRepository.save(utilisateur);
-    	        return true;
-       }
+		List<Utilisateur> list = utilisateurRepository.findByEmail(utilisateur.getEmail()); 	
+		if (list.size() > 0) {
+			return false;
+		} else {
+			utilisateurRepository.save(utilisateur);
+			return true;
+		}
 	}
-	
+
 	@Override
 	public void updateUtilisateur(Utilisateur utilisateur) {
 		utilisateurRepository.save(utilisateur);
 	}
-	
+
 	@Override
 	public void deleteUtilisateur(int Id) {
 		utilisateurRepository.delete(getUtilisateurById(Id));
@@ -64,6 +64,19 @@ public class UtilisateurService implements IUtilisateurService{
 	@Override
 	public boolean userExist(String email) {
 		return utilisateurRepository.existsByEmail(email);
+	}
+
+	@Override
+	public boolean login(String email, String mdp) {
+		List<Utilisateur> user = utilisateurRepository.findByEmail(email);
+		if(user.size() > 0) {
+			return false;
+		} else {
+			if(user.get(0).getMDP() == mdp) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
