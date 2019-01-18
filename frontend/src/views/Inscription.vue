@@ -118,34 +118,29 @@ export default {
         return true;
       }
     },
-    userExist() {
-      AXIOS.get(`/utilisateurExist`,this.user.email)
+    async userExist() {
+      var result=false;
+      await AXIOS.get(`/utilisateurExist/`+this.user.email)
         .then(response => {
-          // JSON responses are automatically parsed.
-          //this.booleanUserExist = response.data
           if(response.data){
             alert('Adresse email déja utilisé');
-            this.$refs.email.$el.focus()
-            return false;
-          } else {
-            return true;
+            this.$refs.email.$el.focus();
           }
-          
-          console.log(response.data);
+          result = response.data;
         })
         .catch(e => {
           this.errors.push(e);
         });
+        return result;
     },
-    onSubmit(evt) {
+    async onSubmit(evt) {
       evt.preventDefault();
-      if (this.checkPassword()) {
-        if(this.userExist()){
+      if (this.checkPassword()==true) {
+        if(await this.userExist()==false){
+          console.log('creation utilisateur');
           this.createUser();
         }
-        
       }
-      /*alert(JSON.stringify(this.user));*/
     },
     onReset(evt) {
       evt.preventDefault();

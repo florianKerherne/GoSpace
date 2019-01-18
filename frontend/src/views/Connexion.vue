@@ -19,7 +19,7 @@
                       label-for="exampleInput2">
           <b-form-input id="exampleInput2"
                         type="password"
-                        v-model="user.name"
+                        v-model="user.mdp"
                         required
                         placeholder="password">
           </b-form-input>
@@ -43,8 +43,12 @@ export default {
       posts: [],
       errors: [],
       user: {
-        email: '',
-        password: ''
+        email: "",
+        nom: "",
+        prenom: "",
+        mdp: "",
+        isAdmin: false,
+        id: 0
       },
       show: true
     };
@@ -52,9 +56,16 @@ export default {
   methods: {
     // Fetches posts when the component is created.
     callConnexion() {
-      AXIOS.get(`/connexion/{email}/{mdp}`)
+            var params = {
+        nom: this.user.nom,
+        prenom: this.user.prenom,
+        email: this.user.email,
+        mdp: this.user.mdp,
+        isAdmin: this.user.isAdmin
+      };
+      AXIOS.get(`/utilisateurExist`,params)
         .then(response => {
-          alert(response.data);
+          console.log(response.data);
         })
         .catch(e => {
           this.errors.push(e);
