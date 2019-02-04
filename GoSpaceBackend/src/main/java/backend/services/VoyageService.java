@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import backend.model.Utilisateur;
 import backend.model.Voyage;
 import backend.repository.VoyageRepository;
 
@@ -22,25 +23,28 @@ public class VoyageService implements IVoyageService{
 	}
 
 	@Override
-	public boolean addVoyage(Voyage voyage) {
-		// TODO Auto-generated method stub
-		return false;
+	public synchronized boolean addVoyage(Voyage voyage) {
+		try {
+			voyageRepository.save(voyage);
+			return true;
+		}catch(Exception ex){
+			return false;
+		}
 	}
 
 	@Override
 	public void updateVoyage(Voyage voyage) {
-		// TODO Auto-generated method stub
+		voyageRepository.save(voyage);
 	}
 
 	@Override
 	public void deleteVoyage(Integer id) {
-		// TODO Auto-generated method stub
+		voyageRepository.delete(getVoyageById(id));
 	}
 
 	@Override
 	public Voyage getVoyageById(Integer id) {
-		Voyage obj = voyageRepository.findById(id);
-		return obj;
+		return voyageRepository.findById(id);
 	}
 
 }
