@@ -59,7 +59,7 @@ export default {
         mdp: this.user.mdp,
         isAdmin: this.user.isAdmin
       };
-      AXIOS.get(`/utilisateurExist`, params)
+      AXIOS.post(`/utilisateurExist`, params)
         .then(response => {
           console.log(response.data);
         })
@@ -70,7 +70,7 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       this.callConnexion();
-      alert(JSON.stringify(this.user));
+      //alert(JSON.stringify(this.user));
     },
     onReset(evt) {
       evt.preventDefault();

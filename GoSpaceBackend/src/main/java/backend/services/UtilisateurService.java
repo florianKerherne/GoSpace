@@ -68,11 +68,12 @@ public class UtilisateurService implements IUtilisateurService{
 
 	@Override
 	public boolean login(String email, String mdp) {
-		List<Utilisateur> user = utilisateurRepository.findByEmail(email);
-		if(user.size() > 0) {
+		List<Utilisateur> user = new ArrayList<>();
+		user = utilisateurRepository.findByEmail(email);
+		if(user.isEmpty()) {
 			return false;
 		} else {
-			if(user.get(0).getMDP() == mdp) {
+			if(user.get(0).getMDP().equals(mdp)) {
 				return true;
 			}
 		}
