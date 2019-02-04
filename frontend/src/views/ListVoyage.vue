@@ -24,7 +24,10 @@
     <p>vos voyage :
       <br>
     </p>
-    <ArticleVoyage/>
+    <b-list-group>
+      <ArticleVoyage/>
+    </b-list-group>
+    
     <h3>Installed CLI Plugins</h3>
   </div>
 </template>
@@ -49,10 +52,11 @@ export default {
   methods: {
     // Fetches posts when the component is created.
     callRestService() {
-      AXIOS.get(`about`)
+      AXIOS.get(`voyage/1`)
         .then(response => {
           // JSON responses are automatically parsed.
           this.posts = response.data;
+          this.nom = this.posts.nom
         })
         .catch(e => {
           this.errors.push(e);

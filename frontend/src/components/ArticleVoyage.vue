@@ -3,16 +3,16 @@
     <div>
       <div id="photo"></div>
       <div id="descriptif">
-        <h3>Titre</h3>
-        <h5>Zone de départ</h5>
-        <p>Descriptif
-          <br>Paris - Mars
+        <h3>{{nom}}</h3>
+        <h5>{{destination}}</h5>
+        <p>{{description}}
+          <br>
         </p>
       </div>
     </div>
     <div id="piedDePage">
-      <h5>999€99</h5>
-      <b-btn @click="callRestService()">GO to the SPACE</b-btn>
+      <h5>{{prix}}</h5>
+      <b-btn>GO to the SPACE</b-btn>
     </div>
   </div>
 </template>
@@ -26,45 +26,52 @@ export default {
 
   data() {
     return {
+      nom : "",
+      destination : "",
+      description : "",
+      prix : 0,
       posts: [],
       errors: []
     };
   },
   methods: {
     // Fetches posts when the component is created.
-    callRestService() {
-      AXIOS.get(`hello`)
+    
+  },
+  mounted:function() {
+      AXIOS.get(`voyage/1`)
         .then(response => {
           // JSON responses are automatically parsed.
-          this.posts = response.data;
+          this.nom = response.data.nom
+          this.prix = response.data.prix
+          this.description = response.data.description
+          console.log(response.data)
         })
         .catch(e => {
           this.errors.push(e);
         });
     }
-  }
 };
 </script>
 
 <style scoped>
 .ArticleVoyage {
-  padding: 30px;
   color: #321168;
   background-color: rgb(141, 26, 106);
-  margin-left:110px;
+  border-radius:2px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);display:table;margin-bottom:12px;position:relative;table-layout:fixed;width:100%
 }
-#photo {
-  padding: 30px;
+
+#photo{
+  display:table-cell;padding:12px;position:relative;text-align:center;vertical-align:middle;width:180px;
   color: #6e6e6e;
   background-color: rgb(71, 71, 71);
-  margin-left:110px;
-  float: left;
 }
 #descriptif {
-  padding: 30px;
+
   color: #eb0606;
   background-color: rgb(14, 168, 168);
-  float: center;
+ 
+  display:table-cell;padding:12px;vertical-align:middle
 }
 #piedDePage {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
