@@ -1,5 +1,6 @@
 package backend.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,9 @@ public class VoyageService implements IVoyageService{
 	
 	@Override
 	public List<Voyage> getAllVoyages() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Voyage> list = new ArrayList<>();
+		voyageRepository.findAll().forEach(e -> list.add(e));
+		return list;
 	}
 
 	@Override
@@ -33,6 +35,12 @@ public class VoyageService implements IVoyageService{
 	@Override
 	public void deleteVoyage(Integer id) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public Voyage getVoyageById(Integer id) {
+		Voyage obj = voyageRepository.findById(id);
+		return obj;
 	}
 
 }

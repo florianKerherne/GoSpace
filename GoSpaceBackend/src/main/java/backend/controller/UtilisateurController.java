@@ -26,7 +26,7 @@ import backend.services.IUtilisateurService;
 @RequestMapping("/")
 public class UtilisateurController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BackendController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UtilisateurController.class);
 	
 	@Autowired
 	private IUtilisateurService utilisateurService;
