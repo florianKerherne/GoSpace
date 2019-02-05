@@ -25,9 +25,27 @@
       <br>
     </p>
     <b-list-group>
-      <ArticleVoyage/>
     </b-list-group>
-    
+    <ul id="example-1">
+      <li v-for="item in result">
+        <div class="ArticleVoyage">
+          <div>
+            <div id="photo"></div>
+            <div id="descriptif">
+              <h3>{{item.nom}}</h3>
+              <h5>{{item.idLieuDestination.planete}} {{item.idLieuDestination.nom}}</h5>
+              <p>{{item.description}}
+                <br>
+              </p>
+            </div>
+          </div>
+          <div id="piedDePage">
+            <h5>{{item.prix}}</h5>
+            <b-btn>GO to the SPACE</b-btn>
+          </div>
+        </div>
+      </li>
+    </ul>
     <h3>Installed CLI Plugins</h3>
   </div>
 </template>
@@ -44,6 +62,13 @@ export default {
   },
   data() {
     return {
+      result: [],
+      detailVoyage: {
+        Destination:"",
+        Prix:"",
+        Description:"",
+        Nom:""
+      },
       posts: [],
       errors: []
     };
@@ -62,6 +87,63 @@ export default {
           this.errors.push(e);
         });
     }
+  },
+  mounted:function() {
+    AXIOS.get(`voyages`)
+      .then(response => {
+        
+        this.result=response.data
+        console.log(this.result)
+       /* response.data.forEach(element => {
+          console.log(element)
+          this.detailVoyage.Description = element.description
+          console.log("1.1")
+          detailVoyage.Nom = element.nom
+          detailVoyage.Prix = element.prix
+          detailVoyage.Destination = element.idLieuDestination.planete + " " +element.idLieuDestination.nom
+          console.log("2")
+          this.result.push(detailVoyage)
+          console.log("3")
+        });*/
+        //console.log("4")
+        //console.log(this.result)
+        // JSON responses are automatically parsed.
+        //this.nom = response.data.nom
+        //this.prix = response.data.prix
+        //this.description = response.data.description
+        //this.destination = response.data.idLieuDestination.planete + " " +response.data.idLieuDestination.nom
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
   }
 };
 </script>
+<style scoped>
+.ArticleVoyage {
+  color: #321168;
+  background-color: rgb(141, 26, 106);
+  border-radius:2px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);display:table;margin-bottom:12px;position:relative;table-layout:fixed;width:100%
+}
+
+#photo{
+  display:table-cell;padding:12px;position:relative;text-align:center;vertical-align:middle;width:180px;
+  color: #6e6e6e;
+  background-color: rgb(71, 71, 71);
+}
+#descriptif {
+
+  color: #eb0606;
+  background-color: rgb(14, 168, 168);
+ 
+  display:table-cell;padding:12px;vertical-align:middle
+}
+#piedDePage {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*text-align: center;*/
+  color: #eb0606;
+  background-color: rgb(0, 255, 55);
+}
+</style>

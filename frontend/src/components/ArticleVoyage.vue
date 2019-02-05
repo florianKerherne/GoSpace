@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     // Fetches posts when the component is created.
-    
   },
   mounted:function() {
       AXIOS.get(`voyage/1`)
@@ -45,7 +44,7 @@ export default {
           this.nom = response.data.nom
           this.prix = response.data.prix
           this.description = response.data.description
-          console.log(response.data)
+          this.destination = response.data.idLieuDestination.planete + " " +response.data.idLieuDestination.nom
         })
         .catch(e => {
           this.errors.push(e);
