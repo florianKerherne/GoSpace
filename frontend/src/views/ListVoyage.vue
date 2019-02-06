@@ -3,7 +3,8 @@
     <b-form inline>
       <b-form-group id="InputPlaneteGroup"
                     label="Planete:"
-                    label-for="InputPlanete">
+                    label-for="InputPlanete"
+                    v-model="searchPlanete">
         <b-form-input id="InputPlanete"
                       type="text"
                       required
@@ -19,7 +20,7 @@
                       placeholder="saisir un lieu">
         </b-form-input>
       </b-form-group>
-      <b-button variant="primary" @click="callRestService()">Rechercher</b-button>
+      <b-button variant="primary" @click="search()">Rechercher</b-button>
     </b-form>
     <p>vos voyage :
       <br>
@@ -40,8 +41,8 @@
             </div>
           </div>
           <div id="piedDePage">
-            <h5>{{item.prix}}</h5>
-            <b-btn>GO to the SPACE</b-btn>
+            <h5 class="PrixArticle">{{item.prix}} €</h5>
+            <b-btn class="BoutonArticle">GO to the SPACE</b-btn>
           </div>
         </div>
       </li>
@@ -63,12 +64,7 @@ export default {
   data() {
     return {
       result: [],
-      detailVoyage: {
-        Destination:"",
-        Prix:"",
-        Description:"",
-        Nom:""
-      },
+      searchPlanete: "",
       posts: [],
       errors: []
     };
@@ -86,32 +82,23 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+    },
+    // Fetches posts when the component is created.
+    search() {
+      AXIOS.get(`voyages/`+this.searchPlanete)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.result = response.data;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
     }
   },
   mounted:function() {
     AXIOS.get(`voyages`)
       .then(response => {
-        
         this.result=response.data
-        console.log(this.result)
-       /* response.data.forEach(element => {
-          console.log(element)
-          this.detailVoyage.Description = element.description
-          console.log("1.1")
-          detailVoyage.Nom = element.nom
-          detailVoyage.Prix = element.prix
-          detailVoyage.Destination = element.idLieuDestination.planete + " " +element.idLieuDestination.nom
-          console.log("2")
-          this.result.push(detailVoyage)
-          console.log("3")
-        });*/
-        //console.log("4")
-        //console.log(this.result)
-        // JSON responses are automatically parsed.
-        //this.nom = response.data.nom
-        //this.prix = response.data.prix
-        //this.description = response.data.description
-        //this.destination = response.data.idLieuDestination.planete + " " +response.data.idLieuDestination.nom
       })
       .catch(e => {
         this.errors.push(e);
@@ -123,7 +110,9 @@ export default {
 .ArticleVoyage {
   color: #321168;
   background-color: rgb(141, 26, 106);
+  text-align: left;
   border-radius:2px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);display:table;margin-bottom:12px;position:relative;table-layout:fixed;width:100%
+  
 }
 
 #photo{
@@ -135,15 +124,21 @@ export default {
 
   color: #eb0606;
   background-color: rgb(14, 168, 168);
- 
+  text-align: left;
   display:table-cell;padding:12px;vertical-align:middle
 }
 #piedDePage {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*text-align: center;*/
+  text-align: right;
   color: #eb0606;
   background-color: rgb(0, 255, 55);
+}
+#BoutonArticle {
+  float: right;
+}
+#PrixArticle{
+  float: left;
 }
 </style>
