@@ -24,6 +24,13 @@
         <b-button variant="primary" type="submit">Connexion</b-button>
       </b-form>
     </div>
+    <div>
+      <p v-if="errors.length">
+        <ul>
+          <li v-for="error in errors">{{ error }}</li>
+        </ul>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -61,16 +68,22 @@ export default {
       };
       AXIOS.post(`/utilisateurExist`, params)
         .then(response => {
-          console.log(response.data);
+           console.log(response.data);
+            this.utilisteurAuthentifier();
         })
         .catch(e => {
-          this.errors.push(e);
+          this.errors.push("Addresse mail ou mot de passe invalide.");
+          this.posts.push(e);
         });
     },
     onSubmit(evt) {
+      this.errors = [];
       evt.preventDefault();
       this.callConnexion();
       //alert(JSON.stringify(this.user));
+    },
+    utilisteurAuthentifier() {
+      window.location = "http://localhost:8080/#/listVoyage"
     },
     onReset(evt) {
       evt.preventDefault();
