@@ -21,8 +21,13 @@ public class Voyage {
 
 	//foreingn key
 	@ManyToOne
-	@JoinColumn(name = "id_lieu")
-	private Lieu idLieu;
+	@JoinColumn(name = "id_lieu_depart")
+	private Lieu idLieuDepart;
+	
+	//foreingn key
+	@ManyToOne
+	@JoinColumn(name = "id_lieu_destination")
+	private Lieu idLieuDestination;
 	
 	@Column(name="nb_places_restantes")
 	private Integer nbPlacesRestantes;
@@ -75,12 +80,21 @@ public class Voyage {
 		this.description = description;
 	}
 
-	public Lieu getId_lieu() {
-		return idLieu;
+
+	public Lieu getIdLieuDepart() {
+		return idLieuDepart;
 	}
 
-	public void setId_lieu(Lieu id_lieu) {
-		this.idLieu = id_lieu;
+	public void setIdLieuDepart(Lieu idLieuDepart) {
+		this.idLieuDepart = idLieuDepart;
+	}
+
+	public Lieu getIdLieuDestination() {
+		return idLieuDestination;
+	}
+
+	public void setIdLieuDestination(Lieu idLieuDestination) {
+		this.idLieuDestination = idLieuDestination;
 	}
 
 	public Integer getNb_places_restantes() {
