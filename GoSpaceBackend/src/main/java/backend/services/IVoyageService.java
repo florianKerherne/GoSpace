@@ -10,5 +10,6 @@ public interface IVoyageService {
 	 boolean addVoyage(Voyage voyage);
 	 void updateVoyage(Voyage voyage);
 	 void deleteVoyage(Integer id);
+	 List<Voyage> findVoyageByNomLieu(String nom);
 	 
 }

@@ -44,6 +44,13 @@ public class VoyageController {
 		return new ResponseEntity<Voyage>(voyage, HttpStatus.OK);
 	}
 	
+	@GetMapping("voyages/{nom}")
+	public ResponseEntity<List<Voyage>> getVoyageByNomPlanete(@PathVariable("nom") String nom) {
+		LOG.info("GET called on getVoyageByNomPlanete"); 
+		List<Voyage> voyage = voyageService.findVoyageByNomLieu(nom);
+		return new ResponseEntity<List<Voyage>>(voyage, HttpStatus.OK);
+	}
+	
 	@PutMapping("Voyage")
 	public ResponseEntity<Voyage> updateVoyage(@RequestBody Voyage voyage) {
 		LOG.info("GET called on updateVoyage");  

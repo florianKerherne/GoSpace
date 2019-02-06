@@ -47,4 +47,9 @@ public class VoyageService implements IVoyageService{
 		return voyageRepository.findById(id);
 	}
 
+	@Override
+	public List<Voyage> findVoyageByNomLieu(String nom) {
+		return voyageRepository.findVoyageByNomLieu(nom);
+	}
+
 }
