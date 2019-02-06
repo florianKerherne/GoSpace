@@ -24,7 +24,7 @@ public class LieuController {
 	
 	@GetMapping("lieu/{id}")
 	public ResponseEntity<Lieu> getLieuById(@PathVariable("id") Integer id) {
-		LOG.info("GET called on getLieuById"); 
+		LOG.info("GET called on getLieuById");
 		Lieu lieu = lieuService.getLieuById(id);
 		return new ResponseEntity<Lieu>(lieu, HttpStatus.OK);
 	}
