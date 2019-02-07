@@ -20,11 +20,11 @@ public class Panier {
     
     @ManyToOne
     @JoinColumn(name = "id_voyage")
-    private Voyage id_voyage;
+    private Voyage idVoyage;
     
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
-    private Utilisateur id_utilisateur;
+    private Utilisateur idUtilisateur;
     
     @Column(name="nb_places_reserves")
     private Integer nb_places_reserves;
@@ -39,19 +39,19 @@ public class Panier {
 	}
 
 	public Voyage getId_voyage() {
-		return id_voyage;
+		return idVoyage;
 	}
 
 	public void setId_voyage(Voyage id_voyage) {
-		this.id_voyage = id_voyage;
+		this.idVoyage = id_voyage;
 	}
 
 	public Utilisateur getId_utilisateur() {
-		return id_utilisateur;
+		return idUtilisateur;
 	}
 
 	public void setId_utilisateur(Utilisateur id_utilisateur) {
-		this.id_utilisateur = id_utilisateur;
+		this.idUtilisateur = id_utilisateur;
 	}
 
 	public Integer getNb_places_reserves() {

@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import backend.model.Utilisateur;
 import backend.repository.UtilisateurRepository;
-import backend.services.IUtilisateurService;
+import backend.services.interfaces.IUtilisateurService;
 
 @RestController()
 @RequestMapping("/")

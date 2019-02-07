@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import backend.model.Utilisateur;
 import backend.model.Voyage;
 import backend.repository.VoyageRepository;
+import backend.services.interfaces.IVoyageService;
 
 @Service("IVoyageService")
 public class VoyageService implements IVoyageService{

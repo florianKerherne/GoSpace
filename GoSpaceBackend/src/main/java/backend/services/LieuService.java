@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import backend.model.Lieu;
 import backend.repository.LieuRepository;
+import backend.services.interfaces.ILieuService;
 
 @Service("ILieuService")
 public class LieuService implements ILieuService{

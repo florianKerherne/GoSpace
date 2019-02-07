@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import backend.model.Utilisateur;
 import backend.model.Voyage;
-import backend.services.IVoyageService;
+import backend.services.interfaces.IVoyageService;
 
 
 @RestController()

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import backend.model.Utilisateur;
 import backend.repository.UtilisateurRepository;
+import backend.services.interfaces.IUtilisateurService;
 
 @Service("IUtilisateurService")
 public class UtilisateurService implements IUtilisateurService{
