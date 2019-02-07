@@ -42,7 +42,7 @@
           </div>
           <div id="piedDePage">
             <h5 class="PrixArticle">{{item.prix}} €</h5>
-            <b-btn class="BoutonArticle">GO to the SPACE</b-btn>
+            <b-btn class="BoutonArticle" @click="accessVoyage(item.id)">GO to the SPACE</b-btn>
           </div>
         </div>
       </li>
@@ -83,14 +83,17 @@ export default {
           this.errors.push(e);
         });
     },
+    accessVoyage(idVoyage) {
+      console.log(idVoyage);
+      this.router.navigate(['/voyage/:id',{id:idVoyage}]);
+      //jQuery.param.querystring(window.location.href, 'id='+idVoyage);
+    },
     // Fetches posts when the component is created.
     search() {
-      console.log(this.searchPlanete)
-      AXIOS.get(`voyages/`+this.searchPlanete)
+      AXIOS.get(`voyages/`+this.searchPlanete.toLowerCase())
         .then(response => {
           // JSON responses are automatically parsed.
           this.result = response.data;
-          window.location.reload();
         })
         .catch(e => {
           this.errors.push(e);

@@ -36,7 +36,7 @@ export default new Router({
       component: Inscription
     },
     {
-      path: "/voyage",
+      path: "/voyage/:id",
       name: "voyage",
       component: Voyage
     },

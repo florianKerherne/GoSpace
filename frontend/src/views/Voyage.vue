@@ -33,6 +33,19 @@ export default {
           this.errors.push(e);
         });
     }
+  },
+  mounted:function() {
+    // AXIOS.get(`voyage/1`)
+    //   .then(response => {
+    //     // JSON responses are automatically parsed.
+    //     this.nom = response.data.nom
+    //     this.prix = response.data.prix
+    //     this.description = response.data.description
+    //     this.destination = response.data.idLieuDestination.planete + " " +response.data.idLieuDestination.nom
+    //   })
+    //   .catch(e => {
+    //     this.errors.push(e);
+    //   });
   }
 };
 </script>
