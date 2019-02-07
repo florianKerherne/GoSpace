@@ -84,8 +84,9 @@ export default {
         });
     },
     accessVoyage(idVoyage) {
-      console.log(idVoyage);
-      this.router.navigate(['/voyage/:id',{id:idVoyage}]);
+      // console.log(idVoyage);
+      // this.router.navigate(['/voyage/:id',{id:idVoyage}]);
+      this.$router.push({ path: `/voyage/`, query: { id: idVoyage } });
       //jQuery.param.querystring(window.location.href, 'id='+idVoyage);
     },
     // Fetches posts when the component is created.

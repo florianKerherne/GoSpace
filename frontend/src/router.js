@@ -34,14 +34,16 @@ export default new Router({
       component: Inscription
     },
     {
-      path: "/voyage/:id",
+      path: "/voyage",
       name: "voyage",
-      component: Voyage
+      component: Voyage,
+      props: true
     },
     {
       path: "/listVoyage",
       name: "listVoyage",
-      component: ListVoyage
+      component: ListVoyage,
+      props: true
     }
   ]
 });
