@@ -3,12 +3,12 @@
     <b-form inline>
       <b-form-group id="InputPlaneteGroup"
                     label="Planete:"
-                    label-for="InputPlanete"
-                    v-model="searchPlanete">
+                    label-for="InputPlanete">
         <b-form-input id="InputPlanete"
                       type="text"
                       required
-                      placeholder="Sélectionner une planete">
+                      placeholder="Sélectionner une planete"
+                      v-model="searchPlanete">
         </b-form-input>
       </b-form-group>
       <b-form-group id="InputLieuGroup"
@@ -85,10 +85,12 @@ export default {
     },
     // Fetches posts when the component is created.
     search() {
+      console.log(this.searchPlanete)
       AXIOS.get(`voyages/`+this.searchPlanete)
         .then(response => {
           // JSON responses are automatically parsed.
           this.result = response.data;
+          window.location.reload();
         })
         .catch(e => {
           this.errors.push(e);
