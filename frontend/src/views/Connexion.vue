@@ -30,6 +30,7 @@
           <li v-for="error in errors">{{ error }}</li>
         </ul>
       </p>
+      <p>{{userId}}</p>
     </div>
   </div>
 </template>
@@ -53,6 +54,7 @@ export default {
         isAdmin: false,
         id: 0
       },
+      userId: "",
       show: true
     };
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <b-btn @click="callRestService()">CALL Spring Boot REST backend service</b-btn>
+    <b-btn @click="test()">CALL Spring Boot REST backend service</b-btn>
     <p>For a guide and recipes on how to configure / customize this project,
       <br>check out the
     </p>
@@ -18,7 +18,8 @@ export default {
   data() {
     return {
       posts: [],
-      errors: []
+      errors: [],
+      userId: "123"
     };
   },
   methods: {
@@ -32,6 +33,11 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+    },
+
+    test() {
+      //this.$router.push({ path: `/Connexion/${this.userId}` });
+      this.$router.push({ path: `/Connexion/`, query: { id: this.userId } });
     }
   }
 };
