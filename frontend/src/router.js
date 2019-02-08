@@ -5,6 +5,7 @@ import Connexion from "./views/Connexion.vue";
 import Inscription from "./views/Inscription.vue";
 import Voyage from "./views/Voyage.vue";
 import ListVoyage from "./views/ListVoyage.vue";
+import Panier from "./views/Panier.vue";
 
 Vue.use(Router);
 
@@ -43,6 +44,12 @@ export default new Router({
       path: "/listVoyage",
       name: "listVoyage",
       component: ListVoyage,
+      props: true
+    },
+    {
+      path: "/panier",
+      name: "panier",
+      component: Panier,
       props: true
     }
   ]
