@@ -29,8 +29,8 @@ public class PanierController {
 	@GetMapping("panier/{id}")
 	public ResponseEntity<Panier> getPanierByIdPersonne(@PathVariable("id") Integer id) {
 		LOG.info("GET called on getPanierByIdPersonne");
-		Panier lieu = panierService.getPanierByIdPersonne(id);
-		return new ResponseEntity<Panier>(lieu, HttpStatus.OK);
+		Panier panier = panierService.getPanierByIdPersonne(id);
+		return new ResponseEntity<Panier>(panier, HttpStatus.OK);
 	}
 	
 	@PostMapping("panier")

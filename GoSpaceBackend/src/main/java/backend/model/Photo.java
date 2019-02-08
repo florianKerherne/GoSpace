@@ -1,5 +1,7 @@
 package backend.model;
 
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +22,10 @@ public class Photo {
 	//foreingn key
 	@ManyToOne
 	@JoinColumn(name = "id_lieu")
-	private Lieu id_lieu;
+	private Lieu idLieu;
 	
 	@Column(name="data")
-	private String data;
+	private Blob data;
 
 	public Integer getId() {
 		return id;
@@ -34,18 +36,18 @@ public class Photo {
 	}
 
 	public Lieu getId_lieu() {
-		return id_lieu;
+		return idLieu;
 	}
 
 	public void setId_lieu(Lieu id_lieu) {
-		this.id_lieu = id_lieu;
+		this.idLieu = id_lieu;
 	}
 
-	public String getData() {
+	public Blob getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(Blob data) {
 		this.data = data;
 	}
 	

@@ -27,7 +27,7 @@ public class Panier {
     private Utilisateur idUtilisateur;
     
     @Column(name="nb_places_reserves")
-    private Integer nb_places_reserves;
+    private Integer nbPlacesReserves;
 
     
 	public Integer getId() {
@@ -55,11 +55,11 @@ public class Panier {
 	}
 
 	public Integer getNb_places_reserves() {
-		return nb_places_reserves;
+		return nbPlacesReserves;
 	}
 
 	public void setNb_places_reserves(Integer nb_places_reserves) {
-		this.nb_places_reserves = nb_places_reserves;
+		this.nbPlacesReserves = nb_places_reserves;
 	}
     
 }

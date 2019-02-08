@@ -4,9 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import backend.model.Lieu;
+import backend.model.Photo;
 
-public interface LieuRepository extends CrudRepository<Lieu, Long> {
-
-	Lieu findById(@Param("id") Integer id);
+public interface PhotoRepository extends CrudRepository<Photo, Long> {
+	
+	Photo findByIdLieu(@Param("id") Lieu id);
 	
 }

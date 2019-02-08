@@ -5,7 +5,7 @@
       <b-collapse is-nav id="nav_collapse" class="pull-right">
         <b-navbar-nav>
           <ul class="nav navbar-nav">
-            <b-nav-item to="/">Bonjour</b-nav-item>
+            <b-nav-item to="/">Acceuil</b-nav-item>
             <b-nav-item to="/about">About</b-nav-item>
             <b-nav-item to="/listVoyage">Liste des voyages</b-nav-item>
             <b-nav-item to="/connexion">Connexion</b-nav-item>
