@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <b-alert variant="success" show>Votre transaction à bien été effectué. Passer un bon voyage !</b-alert>
-    <b-btn class="BoutonArticle" to="/listVoyage">GO to the SPACE</b-btn>
+    <b-btn class="BoutonArticle" to="/">GO to the SPACE</b-btn>
   </div>
 </template>
 
