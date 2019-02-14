@@ -7,6 +7,7 @@ import backend.model.Lieu;
 
 public interface LieuRepository extends CrudRepository<Lieu, Long> {
 
+	
 	Lieu findById(@Param("id") Integer id);
 	
 }

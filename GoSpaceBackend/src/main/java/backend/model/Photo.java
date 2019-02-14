@@ -1,7 +1,5 @@
 package backend.model;
 
-import java.sql.Blob;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
 @Entity
 @Table(name="photo")
-public class Photo {
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+public class Photo{
 	
 	@Id // PrimaryKey
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +27,7 @@ public class Photo {
 	private Lieu idLieu;
 	
 	@Column(name="data")
-	private Blob data;
+	private byte[] data;
 
 	public Integer getId() {
 		return id;
@@ -43,11 +45,11 @@ public class Photo {
 		this.idLieu = id_lieu;
 	}
 
-	public Blob getData() {
+	public byte[] getData() {
 		return data;
 	}
 
-	public void setData(Blob data) {
+	public void setData(byte[] data) {
 		this.data = data;
 	}
 	

@@ -13,6 +13,7 @@ public class PhotoService implements IPhotoService{
 
 	@Autowired
 	PhotoRepository photoRepository;
+	@Autowired
 	LieuRepository lieuRepository;
 	
 	@Override
