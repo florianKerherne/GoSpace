@@ -13,75 +13,72 @@
           method="post"
         >
           <b-form-group
-            id="exampleInputGroup1"
+            id="gTitulaire"
             label="Titulaire de la carte"
-            label-for="exampleInput1"
           >
             <b-form-input
-              id="exampleInput1"
+              id="titulaire"
               type="text"
               v-model="card.titulaire"
               required
               placeholder="Entrer le titulaire"
             ></b-form-input>
           </b-form-group>
+
           <b-form-group
-            id="exampleInputGroup1"
+            id="gNumero"
             label="Numéro de la carte"
-            label-for="exampleInput1"
           >
             <b-form-input
-              id="exampleInput1"
+              id="Numero"
               type="number"
               v-model="card.numero"
               required
               placeholder="Entrer le numéro"
             ></b-form-input>
           </b-form-group>
-          <div class="form-row">
-            <div class="col-xs-12 form-group card required">
-              <label class="control-label">Card Number</label>
-              <input autocomplete="off" class="form-control card-number" size="20" type="text">
-            </div>
+          
+          <b-form-group
+            id="gCvc"
+            label="CVC"
+          >
+            <b-form-input
+              id="Cvc"
+              type="number"
+              v-model="card.cvc"
+              required
+              placeholder="ex. 311"
+            ></b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            id="gExp"
+            label="Expiration"
+          >
+            <b-form-input
+              id="MoisExp"
+              type="number"
+              v-model="card.moisExp"
+              required
+              placeholder="MM"
+            ></b-form-input>
+            
+            <b-form-input
+              id="AnneeExp"
+              type="number"
+              v-model="card.anneeExp"
+              required
+              placeholder="AAAA"
+              size="4"
+            ></b-form-input>
+          </b-form-group>
+
+          <div class="form-control total btn btn-info">
+            Total:
+            <span class="amount">{{prix}} €</span>
+             
           </div>
-          <div class="form-row">
-            <div class="col-xs-4 form-group cvc required">
-              <label class="control-label">CVC</label>
-              <input
-                autocomplete="off"
-                class="form-control card-cvc"
-                placeholder="ex. 311"
-                size="4"
-                type="text"
-              >
-            </div>
-            <div class="col-xs-4 form-group expiration required">
-              <label class="control-label">Expiration</label>
-              <input class="form-control card-expiry-month" placeholder="MM" size="2" type="text">
-            </div>
-            <div class="col-xs-4 form-group expiration required">
-              <label class="control-label"></label>
-              <input class="form-control card-expiry-year" placeholder="YYYY" size="4" type="text">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-12">
-              <div class="form-control total btn btn-info">
-                Total:
-                <span class="amount">$300</span>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-12 form-group">
-              <button class="form-control btn btn-primary submit-button" type="submit">Pay »</button>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-12 error form-group hide">
-              <div class="alert-danger alert">Please correct the errors and try again.</div>
-            </div>
-          </div>
+            <b-btn class="form-control total btn btn-info" @click="action()" >Finaliser la transaction</b-btn>
         </b-form>
       </div>
       <div class="col-md-4"></div>
@@ -105,6 +102,7 @@ export default {
         anneeExp: "",
         cvc: ""
       },
+      prix: 0,
       posts: [],
       errors: [],
       userId: "123"
@@ -122,10 +120,13 @@ export default {
           this.errors.push(e);
         });
     },
-
-    test() {
+    action(){
+      console.log("transaction");
+      this.redirection();
+    },
+    redirection() {
       //this.$router.push({ path: `/Connexion/${this.userId}` });
-      this.$router.push({ path: `/Connexion/`, query: { id: this.userId } });
+      this.$router.push({ path: `/PaymentValider/`, query: { } });
     }
   }
 };

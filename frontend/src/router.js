@@ -13,7 +13,7 @@ export default new Router({
   mode: "hash",
   base: process.env.BASE_URL,
   routes: [{
-      path: "/",
+      path: "/PaymentValider",
       name: "PaymentValider",
       component: PaymentValider
     },

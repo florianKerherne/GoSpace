@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <p>{{userId}}</p>
+    <b-alert variant="success" show>Votre transaction à bien été effectué. Passer un bon voyage !</b-alert>
+    <b-btn class="BoutonArticle" to="/listVoyage">GO to the SPACE</b-btn>
   </div>
 </template>
 
