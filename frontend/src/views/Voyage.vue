@@ -90,6 +90,9 @@ export default {
         });
     },
     AjouterAuPanier(id) {
+      params = {
+        test: 0
+      };
       AXIOS.post("/panier", params)
         .then(response => {
           console.log(response.data);
