@@ -2,7 +2,6 @@ package backend.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import backend.model.Lieu;
 import backend.model.Photo;
 import backend.repository.LieuRepository;
