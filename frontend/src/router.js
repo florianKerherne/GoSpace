@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+import PaymentValider from "./views/PaymentValider.vue";
 import Connexion from "./views/Connexion.vue";
 import Inscription from "./views/Inscription.vue";
 import Voyage from "./views/Voyage.vue";
@@ -14,14 +14,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [{
       path: "/",
-      name: "home",
-      component: Home
+      name: "PaymentValider",
+      component: PaymentValider
     },
     {
-      path: "/about",
-      name: "about",
+      path: "/payment",
+      name: "payment",
       component: () =>
-        import( /* webpackChunkName: "about" */ "./views/About.vue"),
+        import( /* webpackChunkName: "payment" */ "./views/payment.vue"),
       props: true
     },
     {

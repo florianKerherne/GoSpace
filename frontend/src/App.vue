@@ -6,9 +6,9 @@
         <b-navbar-nav>
           <ul class="nav navbar-nav">
             <b-nav-item to="/">Acceuil</b-nav-item>
-            <b-nav-item to="/about">About</b-nav-item>
+            <b-nav-item to="/payment">About</b-nav-item>
             <b-nav-item to="/listVoyage">Liste des voyages</b-nav-item>
-             <b-nav-item to="/panier">Mon Panier</b-nav-item>
+            <b-nav-item to="/panier">Mon Panier</b-nav-item>
             <b-nav-item to="/connexion">Connexion</b-nav-item>
             <b-nav-item to="/inscription">Inscription</b-nav-item>
           </ul>
