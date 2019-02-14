@@ -1,9 +1,7 @@
 <template>
   <div class="ArticleVoyage">
     <div>
-      <div id="photo">
-        <img id="ItemPreview" src>
-      </div>
+      <div id="photo"></div>
       <div id="descriptif">
         <h3>{{DestinationPlanete}} {{DestinationNom}}</h3>
         <h5>{{DestinationDescription}}</h5>
@@ -44,7 +42,6 @@ export default {
       prixNonPromo: 0,
       nbPlace: 0,
       id: "",
-      IdLieu: "",
       DateDepart: "",
       DateArrive: "",
       posts: [],
@@ -52,25 +49,11 @@ export default {
     };
   },
   methods: {
-    ajouterImage() {
-      console.log("ajout Image");
-      AXIOS.get(`Photo/` + 1)
-        .then(response => {
-          console.log(response.data.data);
-          var YourByte = response.data.data;
-          document.getElementById("ItemPreview").src =
-            "data:image/png;base64," + YourByte;
-        })
-        .catch(e => {
-          this.errors.push(e);
-        });
-    },
     chargeVoyage(idVoyage) {
       AXIOS.get(`voyage/` + idVoyage)
         .then(response => {
           // JSON responses are automatically parsed.
           this.DestinationPlanete = response.data.idLieuDestination.planete;
-          this.IdLieu = response.data.idLieuDestination;
           this.DestinationNom = response.data.idLieuDestination.nom;
           this.DestinationDescription =
             response.data.idLieuDestination.description;
@@ -105,7 +88,6 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
-      this.ajouterImage();
     },
     AjouterAuPanier(id) {
       params = {};
@@ -119,6 +101,7 @@ export default {
     }
   },
   mounted: function() {
+    console.log(this.$route.query.id);
     this.chargeVoyage(this.$route.query.id);
   }
 };

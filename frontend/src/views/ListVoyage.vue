@@ -18,12 +18,14 @@
     <p>vos voyage :
       <br>
     </p>
-    <b-list-group></b-list-group>
+    <!--<b-list-group></b-list-group>
     <ul id="example-1">
       <li v-for="item in result" v-bind:key="item">
         <div class="ArticleVoyage">
           <div>
-            <div id="photo"></div>
+            <div id="photo">
+              <img class="PhotoLieu" v-on:load="ajouterImage" src/>
+            </div>
             <div id="descriptif">
               <h3>{{item.nom}}</h3>
               <h5>{{item.idLieuDestination.planete}} {{item.idLieuDestination.nom}}</h5>
@@ -39,23 +41,30 @@
           </div>
         </div>
       </li>
+    </ul>-->
+    <h3>----</h3>
+    <b-list-group></b-list-group>
+    <ul id="example-1">
+      <li v-for="item in result" v-bind:key="item">
+        <ArticleVoyage idArticle="1"/>
+      </li>
     </ul>
-    <h3>Installed CLI Plugins</h3>
   </div>
 </template>
 
 
 <script>
 import { AXIOS } from "../components/http-common";
-//import ArticleVoyage from "@/components/ArticleVoyage.vue";
+import ArticleVoyage from "@/components/ArticleVoyage.vue";
 
 export default {
   name: "listVoyage",
   components: {
-    //ArticleVoyage
+    ArticleVoyage
   },
   data() {
     return {
+      indiceImage:2,
       result: [],
       searchPlanete: "",
       posts: [],
@@ -75,6 +84,22 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+    },
+    ajouterImage() {
+      var id;
+      id=1;
+      console.log("ajout Image"+id);
+      AXIOS.get(`Photo/`+id)
+        .then(response => {
+          //console.log(response.data.data);
+          var YourByte = response.data.data;
+          document.getElementsByClassName("PhotoLieu")[this.indiceImage].src =
+            "data:image/png;base64," + YourByte;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+        this.indiceImage++;
     },
     accessVoyage(idVoyage) {
       // console.log(idVoyage);

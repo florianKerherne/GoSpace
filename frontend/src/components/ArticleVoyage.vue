@@ -1,19 +1,24 @@
 <template>
   <div class="ArticleVoyage">
-    <div>
-      <div id="photo"></div>
-      <div id="descriptif">
-        <h3>{{nom}}</h3>
-        <h5>{{destination}}</h5>
-        <p>{{description}}
-          <br>
-        </p>
-      </div>
-    </div>
-    <div id="piedDePage">
-      <h5>{{prix}}</h5>
-      <b-btn>GO to the SPACE</b-btn>
-    </div>
+    <div class="ArticleVoyage">
+          <div>
+            <div id="photo">
+              <img id="PhotoLieu" src/>
+            </div>
+            <div id="descriptif">
+              <!--<h3>{{result.nom}}</h3>-->
+              <h5>{{DestinationPlanete}} {{DestinationNom}}</h5>
+              <p>
+                {{description}}
+                <br>
+              </p>
+            </div>
+          </div>
+          <div id="piedDePage">
+            <h5 class="PrixArticle">{{prixFinal}} €</h5>
+            <b-btn class="BoutonArticle" @click="accessVoyage(this.idVoyage)">GO to the SPACE</b-btn>
+          </div>
+        </div>
   </div>
 </template>
 
@@ -23,33 +28,74 @@ import { AXIOS } from "./http-common";
 
 export default {
   name: "ArticleVoyage",
-
+  props: ['idArticle'],
   data() {
     return {
-      nom : "",
-      destination : "",
-      description : "",
-      prix : 0,
+      DestinationPlanete: "",
+      DestinationNom: "",
+      DestinationDescription: "",
+      DepartPlanete: "",
+      DepartNom: "",
+      description: "",
+      prixFinal: "",
+      prixNonPromo: 0,
+      idVoyage: "",
+      idLieu: "",
+      result:"",
       posts: [],
       errors: []
     };
   },
   methods: {
     // Fetches posts when the component is created.
-  },
-  mounted:function() {
-      AXIOS.get(`voyage/1`)
+    ajouterImage() {
+      console.log("lieu :"+this.idLieu);
+      AXIOS.get(`Photo/`+this.idLieu)
         .then(response => {
-          // JSON responses are automatically parsed.
-          this.nom = response.data.nom
-          this.prix = response.data.prix
-          this.description = response.data.description
-          this.destination = response.data.idLieuDestination.planete + " " +response.data.idLieuDestination.nom
+          //console.log(response.data.data);
+          var YourByte = response.data.data;
+          document.getElementById("PhotoLieu").src =
+            "data:image/png;base64," + YourByte;
         })
         .catch(e => {
           this.errors.push(e);
         });
+        this.indiceImage++;
     }
+  },
+  mounted:function() {
+    //console.log(this.idArticle);
+    AXIOS.get(`voyage/`+this.idArticle)
+      .then(response => {
+
+        // JSON responses are automatically parsed.
+          this.DestinationPlanete = response.data.idLieuDestination.planete;
+          this.DestinationNom = response.data.idLieuDestination.nom;
+          this.DestinationDescription =
+            response.data.idLieuDestination.description;
+          this.DepartPlanete = response.data.idLieuDepart.planete;
+          this.DepartNom = response.data.idLieuDepart.nom;
+          this.description = response.data.description;
+          if (response.data.promotion > 0) {
+            this.prixNonPromo = response.data.prix;
+            this.prixFinal =
+              response.data.prix -
+              (response.data.prix * response.data.promotion) / 100;
+          } else {
+            this.prixFinal = response.data.prix;
+          }
+          this.nbPlace = response.data.nb_places_restantes;
+          this.idVoyage = response.data.id;
+          this.idLieu = response.data.idLieuDestination.id;
+
+        //-------------
+        this.result = response.data;
+        this.ajouterImage();
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+  }
 };
 </script>
 
@@ -57,27 +103,46 @@ export default {
 .ArticleVoyage {
   color: #321168;
   background-color: rgb(141, 26, 106);
-  border-radius:2px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);display:table;margin-bottom:12px;position:relative;table-layout:fixed;width:100%
+  text-align: left;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  display: table;
+  margin-bottom: 12px;
+  position: relative;
+  table-layout: fixed;
+  width: 100%;
 }
 
-#photo{
-  display:table-cell;padding:12px;position:relative;text-align:center;vertical-align:middle;width:180px;
+#photo {
+  display: table-cell;
+  padding: 12px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 180px;
   color: #6e6e6e;
   background-color: rgb(71, 71, 71);
 }
 #descriptif {
-
   color: #eb0606;
   background-color: rgb(14, 168, 168);
- 
-  display:table-cell;padding:12px;vertical-align:middle
+  text-align: left;
+  display: table-cell;
+  padding: 12px;
+  vertical-align: middle;
 }
 #piedDePage {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*text-align: center;*/
+  text-align: right;
   color: #eb0606;
   background-color: rgb(0, 255, 55);
+}
+#BoutonArticle {
+  float: right;
+}
+#PrixArticle {
+  float: left;
 }
 </style>
