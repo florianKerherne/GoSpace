@@ -1,31 +1,31 @@
 <template>
   <div>
-        <b-card no-body class="overflow-hidden">
+    <b-card no-body class="overflow-hidden">
+      <b-row no-gutters>
+        <b-col md="3">
+            <b-card-img :id="['PhotoLieu'+idVoyage]" src class="rounded-0"/>
+        </b-col>
+        <b-col md="9">
+          <b-card-body :title="[DestinationPlanete+', '+DestinationNom]">
+            
+            <b-card-text>
+              {{description}}
+            </b-card-text>
+          </b-card-body>
           <b-row no-gutters>
-            <b-col md="3">
-               <b-card-img :id="['PhotoLieu'+idVoyage]" src class="rounded-0"/>
+            <b-col md="8">
             </b-col>
-            <b-col md="9">
-              <b-card-body :title="[DestinationPlanete+', '+DestinationNom]">
-                
-                <b-card-text>
-                  {{description}}
-                </b-card-text>
-              </b-card-body>
-              <b-row no-gutters>
-                <b-col md="8">
-                </b-col>
-                <b-col md="2">
-                  <h4>Prix <b-badge>{{prixFinal}} €</b-badge></h4>
-                </b-col>
-                <b-col md="2">
-                <b-button @click="accessVoyage()" variant="primary">GO to the SPACE</b-button>
-                </b-col>
-              </b-row>
+            <b-col md="2">
+              <h4>Prix <b-badge>{{prixFinal}} €</b-badge></h4>
+            </b-col>
+            <b-col md="2">
+            <b-button @click="accessVoyage()" variant="primary">GO to the SPACE</b-button>
             </b-col>
           </b-row>
-          
-        </b-card>
+        </b-col>
+      </b-row>
+      
+    </b-card>
   </div>
   
 </template>

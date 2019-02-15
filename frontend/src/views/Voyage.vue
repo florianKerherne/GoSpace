@@ -1,6 +1,6 @@
 <template>
   <div class="ArticleVoyage">
-    <div>
+    <!--<div>
       <div id="photo"></div>
       <div id="descriptif">
         <h3>{{DestinationPlanete}} {{DestinationNom}}</h3>
@@ -19,7 +19,39 @@
       <h5 class="PrixArticle">{{prixFinal}} €</h5>
       <b-btn class="BoutonAjoutPanier" @click="AjouterAuPanier()">Ajouter au panier</b-btn>
       <b-btn class="BoutonArticle" @click="reserver(this.id)">Réserver</b-btn>
-    </div>
+    </div>-->
+      <b-card no-body class="overflow-hidden">
+      <b-row no-gutters>
+        <b-col md="3">
+            <b-card-img :id="['PhotoLieu'+id]" src class="rounded-0"/>
+        </b-col>
+        <b-col md="9">
+          <b-card-body :title="[DestinationPlanete+', '+DestinationNom]">
+            
+            <b-card-text>
+              <h5>{{DestinationDescription}}</h5>
+              <h6>Lieu de départ : {{DepartPlanete}} {{DepartNom}}</h6>
+              <h6>Date de départ le {{DateDepart}} - Date d'arrivé le {{DateArrive}}</h6>
+            </b-card-text>
+          </b-card-body>
+          <b-row no-gutters>
+            <b-col md="3">
+              <h6><b-badge>{{nbPlace}}</b-badge> places restantes</h6>
+            </b-col>
+            <b-col md="4">
+              <h4>Prix <s v-if="prixNonPromo">{{prixNonPromo}} €</s><b-badge>{{prixFinal}} €</b-badge></h4>
+            </b-col>
+            <b-col md="2">
+              <b-btn class="BoutonAjoutPanier" @click="AjouterAuPanier()">Ajouter au panier</b-btn>
+            </b-col>
+            <b-col md="2">
+              <b-btn class="BoutonArticle" @click="accessPayement()">Réserver</b-btn>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+      
+    </b-card>
   </div>
 </template>
 
@@ -42,6 +74,7 @@ export default {
       prixNonPromo: 0,
       nbPlace: 0,
       id: "",
+      idLieu: "",
       DateDepart: "",
       DateArrive: "",
       posts: [],
@@ -70,6 +103,7 @@ export default {
           }
           this.nbPlace = response.data.nb_places_restantes;
           this.id = response.data.id;
+          this.idLieu = response.data.idLieuDestination.id;
           var varDateDepart = new Date(response.data.date_debut);
           var varDateArrive = new Date(response.data.date_fin);
           this.DateDepart =
@@ -84,6 +118,7 @@ export default {
             varDateArrive.getMonth() +
             "/" +
             varDateArrive.getFullYear();
+          this.ajouterImage();
         })
         .catch(e => {
           this.errors.push(e);
@@ -102,6 +137,21 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+    },
+    ajouterImage() {
+      AXIOS.get(`Photo/`+this.idLieu)
+        .then(response => {
+          var YourByte = response.data.data;
+          document.getElementById("PhotoLieu"+this.id).src =
+            "data:image/png;base64," + YourByte;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+        this.indiceImage++;
+    },
+    accessPayement() {
+      this.$router.push({ path: `/payment/`, query: { id: this.id } });
     }
   },
   mounted: function() {
@@ -112,49 +162,5 @@ export default {
 </script>
 
 <style scoped>
-.ArticleVoyage {
-  color: #321168;
-  background-color: rgb(141, 26, 106);
-  text-align: left;
-  border-radius: 2px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  display: table;
-  margin-bottom: 12px;
-  position: relative;
-  table-layout: fixed;
-  width: 100%;
-}
 
-#photo {
-  display: table-cell;
-  padding: 12px;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  width: 180px;
-  color: #6e6e6e;
-  background-color: rgb(71, 71, 71);
-}
-#descriptif {
-  color: #eb0606;
-  background-color: rgb(14, 168, 168);
-  text-align: left;
-  display: table-cell;
-  padding: 12px;
-  vertical-align: middle;
-}
-#piedDePage {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: right;
-  color: #eb0606;
-  background-color: rgb(0, 255, 55);
-}
-#BoutonArticle {
-  float: right;
-}
-#PrixArticle {
-  float: left;
-}
 </style>

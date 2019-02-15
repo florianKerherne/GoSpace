@@ -20,6 +20,11 @@
     </p>
     <h3>----</h3>
     <b-list-group></b-list-group>
+    <!--<div>
+      <b-row v-for="item in result" v-bind:key="item">
+          <ArticleVoyage :idArticle=item.id></ArticleVoyage>
+        </b-row>
+    </div>-->
     <ul id="example-1">
       <li v-for="item in result" v-bind:key="item">
         <ArticleVoyage :idArticle=item.id></ArticleVoyage>
