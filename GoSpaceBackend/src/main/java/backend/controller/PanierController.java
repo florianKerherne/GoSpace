@@ -35,7 +35,11 @@ public class PanierController {
 	
 	@PostMapping("panier")
 	public ResponseEntity<Void> addVoyageToPanier(@RequestBody Panier panier, UriComponentsBuilder builder) {
-				LOG.info("GET called on addVoyageToPanier");        
+				LOG.info("GET called on addVoyageToPanier");
+				System.out.println(panier == null);
+				System.out.println(panier.getId());
+				System.out.println(panier.getId_utilisateur());
+				System.out.println(panier.getNb_places_reserves());
 				boolean flag = panierService.addVoyageToPanier(panier);
                 if (flag == false) {
                 	return new ResponseEntity<Void>(HttpStatus.CONFLICT);

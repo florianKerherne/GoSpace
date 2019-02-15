@@ -1,17 +1,20 @@
 package backend.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="panier")
-public class Panier {
+public class Panier implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +32,15 @@ public class Panier {
     @Column(name="nb_places_reserves")
     private Integer nbPlacesReserves;
 
+    protected Panier() {}
     
+	public Panier(Integer id, Voyage idVoyage, Utilisateur idUtilisateur, Integer nbPlacesReserves) {
+		this.id = id;
+		this.idVoyage = idVoyage;
+		this.idUtilisateur = idUtilisateur;
+		this.nbPlacesReserves = nbPlacesReserves;
+	}
+
 	public Integer getId() {
 		return id;
 	}

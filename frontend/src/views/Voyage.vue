@@ -17,7 +17,7 @@
       <h6 class="PlaceRestante">{{nbPlace}} places restantes</h6>
       <h6 v-if="prixNonPromo>0" class="PrixNonPromo">{{prixNonPromo}} €</h6>
       <h5 class="PrixArticle">{{prixFinal}} €</h5>
-      <b-btn class="BoutonAjoutPanier" @click="AjouterAuPanier(this.id)">Ajouter au panier</b-btn>
+      <b-btn class="BoutonAjoutPanier" @click="AjouterAuPanier()">Ajouter au panier</b-btn>
       <b-btn class="BoutonArticle" @click="reserver(this.id)">Réserver</b-btn>
     </div>
   </div>
@@ -89,8 +89,12 @@ export default {
           this.errors.push(e);
         });
     },
-    AjouterAuPanier(id) {
-      params = {};
+    AjouterAuPanier() {
+      var params = {
+        idVoyage: this.$route.query.id,
+        idUtilisateur: 1,
+        nbPlacesReserves: 1
+      };
       AXIOS.post("/panier", params)
         .then(response => {
           console.log(response.data);

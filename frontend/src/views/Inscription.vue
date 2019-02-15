@@ -111,19 +111,19 @@ export default {
     },
     checkPassword() {
       if (this.mdp2 != this.user.mdp) {
-        alert('Mot de passe de confirmation invalide');
-        this.$refs.mdpConfirme.$el.focus()
+        alert("Mot de passe de confirmation invalide");
+        this.$refs.mdpConfirme.$el.focus();
         return false;
       } else {
         return true;
       }
     },
     async userExist() {
-      var result=false;
-      await AXIOS.get(`/utilisateurExist/`+this.user.email)
+      var result = false;
+      await AXIOS.get(`/utilisateurExist/` + this.user.email)
         .then(response => {
-          if(response.data){
-            alert('Adresse email déja utilisé');
+          if (response.data) {
+            alert("Adresse email déja utilisé");
             this.$refs.email.$el.focus();
           }
           result = response.data;
@@ -131,13 +131,13 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
-        return result;
+      return result;
     },
     async onSubmit(evt) {
       evt.preventDefault();
-      if (this.checkPassword()==true) {
-        if(await this.userExist()==false){
-          console.log('creation utilisateur');
+      if (this.checkPassword() == true) {
+        if ((await this.userExist()) == false) {
+          console.log("creation utilisateur");
           this.createUser();
         }
       }
