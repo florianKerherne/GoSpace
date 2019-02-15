@@ -1,25 +1,33 @@
 <template>
-  <div class="ArticleVoyage">
-    <div class="ArticleVoyage">
-          <div>
-            <div class="photo">
-              <img :id="['PhotoLieu'+idVoyage]" height="174" width="250" src/>
-            </div>
-            <div class="descriptif">
-              <!--<h3>{{result.nom}}</h3>-->
-              <h5>{{DestinationPlanete}} {{DestinationNom}}</h5>
-              <p>
-                {{description}}
-                <br>
-              </p>
-            </div>
-          </div>
-          <div class="piedDePage">
-            <h5 class="PrixArticle">{{prixFinal}} €</h5>
-            <b-btn class="BoutonArticle" @click="accessVoyage()">GO to the SPACE</b-btn>
-          </div>
-        </div>
+  <div>
+        <b-card no-body class="overflow-hidden">
+          <b-row no-gutters>
+            <b-col md="3">
+               <b-card-img :id="['PhotoLieu'+idVoyage]" src class="rounded-0"/>
+            </b-col>
+            <b-col md="9">
+              <b-card-body :title="[DestinationPlanete+', '+DestinationNom]">
+                
+                <b-card-text>
+                  {{description}}
+                </b-card-text>
+              </b-card-body>
+              <b-row no-gutters>
+                <b-col md="8">
+                </b-col>
+                <b-col md="2">
+                  <h4>Prix <b-badge>{{prixFinal}} €</b-badge></h4>
+                </b-col>
+                <b-col md="2">
+                <b-button @click="accessVoyage()" variant="primary">GO to the SPACE</b-button>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+          
+        </b-card>
   </div>
+  
 </template>
 
 
@@ -94,44 +102,5 @@ export default {
 </script>
 
 <style scoped>
-.ArticleVoyage {
-  color: #321168;
-  background-color: rgb(141, 26, 106);
-  text-align: left;
-  border-radius: 2px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  display: table;
-  margin-bottom: 12px;
-  position: relative;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.photo {
-  display: table-cell;
-  padding: 12px;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  width: 180px;
-  color: #6e6e6e;
-  background-color: rgb(71, 71, 71);
-}
-.descriptif {
-  color: #eb0606;
-  background-color: rgb(14, 168, 168);
-  text-align: left;
-  display: table-cell;
-  padding: 12px;
-  vertical-align: middle;
-}
-.piedDePage {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: right;
-  color: #eb0606;
-  background-color: rgb(0, 255, 55);
-}
 
 </style>
