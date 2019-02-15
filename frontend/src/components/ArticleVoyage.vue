@@ -2,10 +2,10 @@
   <div class="ArticleVoyage">
     <div class="ArticleVoyage">
           <div>
-            <div id="photo">
-              <img id="PhotoLieu" src/>
+            <div class="photo">
+              <img :id="['PhotoLieu'+idVoyage]" height="174" width="250" src/>
             </div>
-            <div id="descriptif">
+            <div class="descriptif">
               <!--<h3>{{result.nom}}</h3>-->
               <h5>{{DestinationPlanete}} {{DestinationNom}}</h5>
               <p>
@@ -14,9 +14,9 @@
               </p>
             </div>
           </div>
-          <div id="piedDePage">
+          <div class="piedDePage">
             <h5 class="PrixArticle">{{prixFinal}} €</h5>
-            <b-btn class="BoutonArticle" @click="accessVoyage(this.idVoyage)">GO to the SPACE</b-btn>
+            <b-btn class="BoutonArticle" @click="accessVoyage()">GO to the SPACE</b-btn>
           </div>
         </div>
   </div>
@@ -49,42 +49,36 @@ export default {
   methods: {
     // Fetches posts when the component is created.
     ajouterImage() {
-      console.log("lieu :"+this.idLieu);
       AXIOS.get(`Photo/`+this.idLieu)
         .then(response => {
-          //console.log(response.data.data);
           var YourByte = response.data.data;
-          document.getElementById("PhotoLieu").src =
+          document.getElementById("PhotoLieu"+this.idVoyage).src =
             "data:image/png;base64," + YourByte;
         })
         .catch(e => {
           this.errors.push(e);
         });
         this.indiceImage++;
+    },
+    accessVoyage() {
+      this.$router.push({ path: `/voyage/`, query: { id: this.idVoyage } });
     }
   },
   mounted:function() {
-    //console.log(this.idArticle);
     AXIOS.get(`voyage/`+this.idArticle)
       .then(response => {
 
-        // JSON responses are automatically parsed.
           this.DestinationPlanete = response.data.idLieuDestination.planete;
           this.DestinationNom = response.data.idLieuDestination.nom;
-          this.DestinationDescription =
-            response.data.idLieuDestination.description;
-          this.DepartPlanete = response.data.idLieuDepart.planete;
-          this.DepartNom = response.data.idLieuDepart.nom;
+
           this.description = response.data.description;
           if (response.data.promotion > 0) {
-            this.prixNonPromo = response.data.prix;
             this.prixFinal =
               response.data.prix -
               (response.data.prix * response.data.promotion) / 100;
           } else {
             this.prixFinal = response.data.prix;
           }
-          this.nbPlace = response.data.nb_places_restantes;
           this.idVoyage = response.data.id;
           this.idLieu = response.data.idLieuDestination.id;
 
@@ -113,7 +107,7 @@ export default {
   width: 100%;
 }
 
-#photo {
+.photo {
   display: table-cell;
   padding: 12px;
   position: relative;
@@ -123,7 +117,7 @@ export default {
   color: #6e6e6e;
   background-color: rgb(71, 71, 71);
 }
-#descriptif {
+.descriptif {
   color: #eb0606;
   background-color: rgb(14, 168, 168);
   text-align: left;
@@ -131,7 +125,7 @@ export default {
   padding: 12px;
   vertical-align: middle;
 }
-#piedDePage {
+.piedDePage {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -139,10 +133,5 @@ export default {
   color: #eb0606;
   background-color: rgb(0, 255, 55);
 }
-#BoutonArticle {
-  float: right;
-}
-#PrixArticle {
-  float: left;
-}
+
 </style>
