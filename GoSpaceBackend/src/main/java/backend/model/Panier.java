@@ -34,8 +34,7 @@ public class Panier implements Serializable{
 
     protected Panier() {}
     
-	public Panier(Integer id, Voyage idVoyage, Utilisateur idUtilisateur, Integer nbPlacesReserves) {
-		this.id = id;
+	public Panier(Voyage idVoyage, Utilisateur idUtilisateur, Integer nbPlacesReserves) {
 		this.idVoyage = idVoyage;
 		this.idUtilisateur = idUtilisateur;
 		this.nbPlacesReserves = nbPlacesReserves;

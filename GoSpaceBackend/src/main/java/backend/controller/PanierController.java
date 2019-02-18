@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import backend.model.Panier;
 import backend.services.interfaces.IPanierService;
+import modelDTO.PanierDTO;
 
 @RestController()
 @RequestMapping("/")
@@ -34,18 +35,14 @@ public class PanierController {
 	}
 	
 	@PostMapping("panier")
-	public ResponseEntity<Void> addVoyageToPanier(@RequestBody Panier panier, UriComponentsBuilder builder) {
+	public ResponseEntity<Void> addVoyageToPanier(@RequestBody PanierDTO panierDTO, UriComponentsBuilder builder) {
 				LOG.info("GET called on addVoyageToPanier");
-				System.out.println(panier == null);
-				System.out.println(panier.getId());
-				System.out.println(panier.getId_utilisateur());
-				System.out.println(panier.getNb_places_reserves());
-				boolean flag = panierService.addVoyageToPanier(panier);
+				boolean flag = panierService.addVoyageToPanier(panierDTO);
                 if (flag == false) {
                 	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
                 }
                 HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(builder.path("/panier/{id}").buildAndExpand(panier.getId()).toUri());
+                headers.setLocation(builder.path("/panier/{id}").buildAndExpand(panierDTO.getIdUtilisateur()).toUri());
                 return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
