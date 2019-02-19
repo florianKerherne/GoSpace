@@ -1,5 +1,7 @@
 package backend.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,10 @@ public class PanierController {
 	IPanierService panierService;
 	
 	@GetMapping("panier/{id}")
-	public ResponseEntity<Panier> getPanierByIdPersonne(@PathVariable("id") Integer id) {
+	public ResponseEntity<List<Panier>> getPanierByIdPersonne(@PathVariable("id") Integer id) {
 		LOG.info("GET called on getPanierByIdPersonne");
-		Panier panier = panierService.getPanierByIdPersonne(id);
-		return new ResponseEntity<Panier>(panier, HttpStatus.OK);
+		List<Panier> panier = panierService.getPanierByIdPersonne(id);
+		return new ResponseEntity<List<Panier>>(panier, HttpStatus.OK);
 	}
 	
 	@PostMapping("panier")

@@ -1,5 +1,7 @@
 package backend.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class PanierService implements IPanierService{
 	VoyageRepository voyageRepository;
 	
 	@Override
-	public Panier getPanierByIdPersonne(Integer Id) {
+	public List<Panier> getPanierByIdPersonne(Integer Id) {
 		Utilisateur user = utilisateurRepository.findById(Id);
 		if(user == null) {
 			return null;
