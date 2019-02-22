@@ -8,17 +8,16 @@
         <div>
           <div id="photo"></div>
           <div id="descriptif">
-            <h3>{{item.nom}}</h3>
-            <h5>{{item.idLieuDestination.planete}} {{item.idLieuDestination.nom}}</h5>
+            <h3>{{this.prixTotal}}</h3>
+            <h5></h5>
             <p>
-              {{item.description}}
               <br>
             </p>
           </div>
         </div>
         <div id="piedDePage">
-          <h5 class="PrixArticle">{{item.prix}} €</h5>
-          <b-btn class="BoutonArticle" @click="accessVoyage(item.id)">GO to the SPACE</b-btn>
+          <h5 class="PrixArticle"></h5>
+          <b-btn class="BoutonArticle" @click="accessVoyage()">GO to the SPACE</b-btn>
         </div>
       </div>
     </ul>
@@ -39,19 +38,56 @@ export default {
   data() {
     return {
       result: [],
-      searchPlanete: "",
+      prixTotal: "",
       posts: [],
       errors: []
     };
   },
 
   methods: {
-    accessVoyage() {}
+    accessVoyage() {},
+    getResultat() {
+      var tailleTableau = this.posts.length;
+      this.prixTotal = 0;
+      var i;
+      console.log("test2");
+      for (i = 0; i < tailleTableau; i++) {
+        this.posts.pop();
+      }
+      console.log("test3");
+      var prixToTalTemp = 0;
+      var postsTemp = [];
+      this.result.forEach(function(element) {
+        var object = {
+          prix: element.id_voyage.prix,
+          planeteDepart: element.id_voyage.idLieuDepart.planete,
+          planeteDestiantion: element.id_voyage.idLieuDestination.planete,
+          lieuDepart: element.id_voyage.idLieuDepart.nom,
+          lieuDestination: element.id_voyage.idLieuDestination.nom,
+          promotion: element.id_voyage.promotion,
+          nbPlacesReserves: element.nb_places_reserves,
+          dateDebut: element.id_voyage.date_debut,
+          dateFin: element.id_voyage.date_fin
+        };
+        prixToTalTemp += element.id_voyage.prix;
+        console.log(object);
+        postsTemp.push(object);
+        console.log("test5");
+      });
+      console.log("test6");
+      this.posts = this.postsTemp;
+      this.prixTotal = prixToTalTemp;
+      console.log(this.prixTotal);
+    }
   },
   mounted: function() {
     AXIOS.get(`panier/` + 1)
       .then(response => {
         this.result = response.data;
+        console.log("test");
+        this.getResultat();
+        console.log("test12");
+        console.log(this.result.length);
       })
       .catch(e => {
         this.errors.push(e);
