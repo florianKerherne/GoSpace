@@ -1,27 +1,19 @@
 <template>
   <div class="Panier">
-    <p>vos voyage :
+    <p>vos voyage(s) :
       <br>
     </p>
-    <ul id="example-1">
-      <div class="ArticleVoyage">
-        <div>
-          <div id="photo"></div>
-          <div id="descriptif">
-            <h3>{{this.prixTotal}}</h3>
-            <h5></h5>
-            <p>
-              <br>
-            </p>
-          </div>
-        </div>
-        <div id="piedDePage">
-          <h5 class="PrixArticle"></h5>
-          <b-btn class="BoutonArticle" @click="accessVoyage()">GO to the SPACE</b-btn>
-        </div>
+
+    <div v-for="item in posts" v-bind:key="item" class="ArticlesVoyage">
+      <div>
+        <p>{{item.planeteDepart}}</p>
+        <p>{{item.planeteArrive}}</p>
       </div>
-    </ul>
-    <h3>Installed CLI Plugins</h3>
+    </div>
+    <div id>
+      <h3>Coût total du panier : {{this.prixTotal}} $</h3>
+      <b-btn class="BoutonArticle" @click="accessVoyage()">Payement</b-btn>
+    </div>
   </div>
 </template>
 
@@ -50,11 +42,9 @@ export default {
       var tailleTableau = this.posts.length;
       this.prixTotal = 0;
       var i;
-      console.log("test2");
       for (i = 0; i < tailleTableau; i++) {
         this.posts.pop();
       }
-      console.log("test3");
       var prixToTalTemp = 0;
       var postsTemp = [];
       this.result.forEach(function(element) {
@@ -70,24 +60,17 @@ export default {
           dateFin: element.id_voyage.date_fin
         };
         prixToTalTemp += element.id_voyage.prix;
-        console.log(object);
         postsTemp.push(object);
-        console.log("test5");
       });
-      console.log("test6");
       this.posts = this.postsTemp;
       this.prixTotal = prixToTalTemp;
-      console.log(this.prixTotal);
     }
   },
   mounted: function() {
     AXIOS.get(`panier/` + 1)
       .then(response => {
         this.result = response.data;
-        console.log("test");
         this.getResultat();
-        console.log("test12");
-        console.log(this.result.length);
       })
       .catch(e => {
         this.errors.push(e);
@@ -107,6 +90,12 @@ export default {
   position: relative;
   table-layout: fixed;
   width: 100%;
+}
+
+.BoutonArticle {
+  position: absolute;
+  text-align: center;
+  margin-left: 50%;
 }
 
 #photo {
