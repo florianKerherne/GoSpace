@@ -85,9 +85,8 @@ export default {
     utilisteurAuthentifier() {
       AXIOS.get(`/findUtilisateur/`+this.user.email)
         .then(response => {
-           
-            localStorage.setItem('user', JSON.stringify(response.data.id));
-            console.log("id:"+response.data.id+"save:"+localStorage.getItem('user'));
+            localStorage.setItem('user', JSON.stringify(response.data));
+            //console.log("id:"+response.data+"save:"+localStorage.getItem('user'));
         })
         .catch(e => {
           this.errors.push("Addresse mail ou mot de passe invalide.");

@@ -30,7 +30,9 @@
           </b-row>
         </b-col>
       </b-row>
-      
+      <b-alert variant="danger" dismissible v-model="showDismissibleAlert">
+        Vous n'êtes pas connecter ! Veuillez vous connecter pour pouvoir continuer.
+      </b-alert>
     </b-card>
   </div>
 </template>
@@ -59,6 +61,7 @@ export default {
       DateArrive: "",
       StatutBtnPanier:"secondary",
       EstAjouterAuPanier:false,
+      showDismissibleAlert:false,
       posts: [],
       errors: []
     };
@@ -107,11 +110,12 @@ export default {
         });
     },
     AjouterAuPanier() {
+      if(localStorage.getItem('user')){
       if(this.EstAjouterAuPanier==false){
         this.EstAjouterAuPanier=true;
         var params = {
         idVoyage: this.$route.query.id,
-        idUtilisateur: 1,
+        idUtilisateur: localStorage.getItem('user'),
         nbPlacesReserves: 1
       };
       AXIOS.post("/panier", params)
@@ -122,6 +126,10 @@ export default {
           this.errors.push(e);
         });
         this.StatutBtnPanier="success";
+      }
+      }else{
+        //non connecter
+        this.showDismissibleAlert=true;
       }
       
     },
@@ -142,6 +150,7 @@ export default {
     }
   },
   mounted: function() {
+    
     this.chargeVoyage(this.$route.query.id);
   }
 };

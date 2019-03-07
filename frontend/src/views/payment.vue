@@ -170,8 +170,8 @@ export default {
       });
       this.prixFinal = prixToTalTemp;
     },
-    chargePrixPanier(){
-      AXIOS.get(`panier/` + 1)
+    chargePrixPanier(id){
+      AXIOS.get(`panier/` + id)
       .then(response => {
         this.result = response.data;
         this.getTotalPanier();
@@ -182,10 +182,11 @@ export default {
     }
   },
   mounted: function() {
+    console.log("save:"+localStorage.getItem('user'));
     if(this.$route.query.id>0){
       this.chargePrixVoyage(this.$route.query.id);
-    }else{
-      this.chargePrixPanier();
+    }else if(localStorage.getItem('user')){
+      this.chargePrixPanier(localStorage.getItem('user'));
     }
     
   }

@@ -85,7 +85,8 @@ export default {
     }
   },
   mounted: function() {
-    AXIOS.get(`panier/` + 1)
+    if(localStorage.getItem('user')){
+      AXIOS.get(`panier/` + localStorage.getItem('user'))
       .then(response => {
         this.result = response.data;
         this.getResultat();
@@ -93,6 +94,7 @@ export default {
       .catch(e => {
         this.errors.push(e);
       });
+    }
   }
 };
 </script>
