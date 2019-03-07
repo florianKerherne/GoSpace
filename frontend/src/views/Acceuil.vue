@@ -1,20 +1,23 @@
 <template>
-  <div class="hello">
-    <b-btn @click="callRestService()">CALL Spring Boot REST backend service</b-btn>
-    <p>For a guide and recipes on how to configure / customize this project,
-      <br>check out the
+  <div class="Acceuil">
+    <p>Bienvenue sur le premier site de voyage dans l'espace
+      <br>
     </p>
-    <h3>Installed CLI Plugins</h3>
+    <div>
+      <carrousel></carrousel>
+    </div>
   </div>
 </template>
 
-
 <script>
-import { AXIOS } from "./http-common";
+import { AXIOS } from "../components/http-common";
+import carrousel from "@/components/carrousel.vue";
 
 export default {
-  name: "hello",
-
+  name: "Acceuil",
+  components: {
+    carrousel
+  },
   data() {
     return {
       posts: [],

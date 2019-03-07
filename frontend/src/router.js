@@ -6,6 +6,7 @@ import Inscription from "./views/Inscription.vue";
 import Voyage from "./views/Voyage.vue";
 import ListVoyage from "./views/ListVoyage.vue";
 import Panier from "./views/Panier.vue";
+import Acceuil from "./views/Acceuil.vue";
 
 Vue.use(Router);
 
@@ -50,6 +51,12 @@ export default new Router({
       path: "/panier",
       name: "panier",
       component: Panier,
+      props: true
+    },
+    {
+      path: "/",
+      name: "Acceuil",
+      component: Acceuil,
       props: true
     }
   ]
