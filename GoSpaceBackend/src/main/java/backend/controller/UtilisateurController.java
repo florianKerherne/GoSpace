@@ -38,6 +38,12 @@ public class UtilisateurController {
 		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
 	}
 	
+	@GetMapping("utilisateur/{email}")
+	public ResponseEntity<Integer> getIdUserByEmail(@PathVariable("id") String email) {
+		LOG.info("GET called on getUserById"); 
+		Integer id = utilisateurService.getIdUtilisateurByEmail(email);
+		return new ResponseEntity<Integer>(id, HttpStatus.OK);
+	}
 //	@GetMapping("utilisateur/{nom}")
 //	public ResponseEntity<List<Utilisateur>> getUserByNom(@PathVariable("nom") String nom) {
 //		LOG.info("GET called on userExist"); 

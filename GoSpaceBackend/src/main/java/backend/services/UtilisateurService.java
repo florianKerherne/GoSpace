@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +25,16 @@ public class UtilisateurService implements IUtilisateurService{
 
 	@Override
 	public Utilisateur getUtilisateurById(long Id) {
-		Utilisateur obj = utilisateurRepository.findById(Id).get();
-		return obj;
+		return utilisateurRepository.findById(Id).get();
 	}	
 
+	@Override
+	public Integer getIdUtilisateurByEmail(String email) {
+		Integer id = utilisateurRepository.findIdByEmail(email);
+		return id;
+	}
+
+	
 	@Override
 	public List<Utilisateur> getUtilisateurByNom(String nom) {
 		List<Utilisateur> list = utilisateurRepository.findByNom(nom); 

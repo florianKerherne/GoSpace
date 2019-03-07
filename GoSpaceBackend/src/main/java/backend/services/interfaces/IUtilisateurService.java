@@ -14,4 +14,5 @@ public interface IUtilisateurService {
      boolean login(String email, String mdp);
      void updateUtilisateur(Utilisateur utilisateur);
      void deleteUtilisateur(int Id);
+     Integer getIdUtilisateurByEmail(String email);
 }
