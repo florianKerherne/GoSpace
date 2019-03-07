@@ -75,7 +75,7 @@
 
           <div class="form-control total btn btn-info">
             Total:
-            <span class="amount">{{prix}} €</span>
+            <span class="amount">{{prixFinal}} €</span>
              
           </div>
             <b-btn class="form-control total btn btn-info" @click="action()" >Finaliser la transaction</b-btn>
@@ -102,10 +102,10 @@ export default {
         anneeExp: "",
         cvc: ""
       },
-      prix: 0,
       posts: [],
       errors: [],
-      userId: "123"
+      userId: "123",
+      prixFinal:0
     };
   },
   methods: {
@@ -127,7 +127,29 @@ export default {
     redirection() {
       //this.$router.push({ path: `/Connexion/${this.userId}` });
       this.$router.push({ path: `/PaymentValider/`, query: { } });
+    },
+    chargePrixVoyage(idVoyage) {
+      AXIOS.get(`voyage/` + idVoyage)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          if (response.data.promotion > 0) {
+            this.prixFinal =
+              response.data.prix -
+              (response.data.prix * response.data.promotion) / 100;
+          } else {
+            this.prixFinal = response.data.prix;
+          }
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
     }
+  },
+  mounted: function() {
+    if(this.$route.query.id>0){
+      this.chargePrixVoyage(this.$route.query.id);
+    }
+    
   }
 };
 </script>

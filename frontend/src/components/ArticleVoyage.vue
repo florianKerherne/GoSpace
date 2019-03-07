@@ -7,16 +7,16 @@
         </b-col>
         <b-col md="9">
           <b-card-body :title="[DestinationPlanete+', '+DestinationNom]">
-            
-            <b-card-text>
-              {{description}}
-            </b-card-text>
+            <!--<b-card-text>-->
+              <h5>{{description}}</h5>
+              <h6>Date de départ le {{DateDepart}}</h6>
+            <!--</b-card-text>-->
           </b-card-body>
           <b-row no-gutters>
-            <b-col md="8">
+            <b-col md="7">
             </b-col>
-            <b-col md="2">
-              <h4>Prix <b-badge>{{prixFinal}} €</b-badge></h4>
+            <b-col md="3">
+              <h4 style="display: inline-block;">Prix <h6 style="display: inline-block;"><s v-if="prixNonPromo">{{prixNonPromo}} €</s></h6><b-badge>{{prixFinal}} €</b-badge></h4>
             </b-col>
             <b-col md="2">
             <b-button @click="accessVoyage()" variant="primary">GO to the SPACE</b-button>
@@ -44,6 +44,7 @@ export default {
       DestinationDescription: "",
       DepartPlanete: "",
       DepartNom: "",
+      DateDepart: "",
       description: "",
       prixFinal: "",
       prixNonPromo: 0,
@@ -78,17 +79,26 @@ export default {
 
           this.DestinationPlanete = response.data.idLieuDestination.planete;
           this.DestinationNom = response.data.idLieuDestination.nom;
-
+          var varDateDepart = new Date(response.data.date_debut);
+          this.DateDepart =
+            varDateDepart.getDay() +
+            "/" +
+            varDateDepart.getMonth() +
+            "/" +
+            varDateDepart.getFullYear();
           this.description = response.data.description;
+          
+          this.idVoyage = response.data.id;
+          this.idLieu = response.data.idLieuDestination.id;
+          //---Prix
           if (response.data.promotion > 0) {
+            this.prixNonPromo = response.data.prix;
             this.prixFinal =
               response.data.prix -
               (response.data.prix * response.data.promotion) / 100;
           } else {
             this.prixFinal = response.data.prix;
           }
-          this.idVoyage = response.data.id;
-          this.idLieu = response.data.idLieuDestination.id;
 
         //-------------
         this.result = response.data;

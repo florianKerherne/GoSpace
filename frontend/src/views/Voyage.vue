@@ -28,18 +28,18 @@
         <b-col md="9">
           <b-card-body :title="[DestinationPlanete+', '+DestinationNom]">
             
-            <b-card-text>
+            <!--<b-card-text>-->
               <h5>{{DestinationDescription}}</h5>
               <h6>Lieu de départ : {{DepartPlanete}} {{DepartNom}}</h6>
               <h6>Date de départ le {{DateDepart}} - Date d'arrivé le {{DateArrive}}</h6>
-            </b-card-text>
+            <!--</b-card-text>-->
           </b-card-body>
           <b-row no-gutters>
             <b-col md="3">
               <h6><b-badge>{{nbPlace}}</b-badge> places restantes</h6>
             </b-col>
             <b-col md="4">
-              <h4>Prix <s v-if="prixNonPromo">{{prixNonPromo}} €</s><b-badge>{{prixFinal}} €</b-badge></h4>
+              <h4 style="display: inline-block;">Prix <h6 style="display: inline-block;"><s v-if="prixNonPromo">{{prixNonPromo}} €</s></h6><b-badge>{{prixFinal}} €</b-badge></h4>
             </b-col>
             <b-col md="2">
               <b-btn class="BoutonAjoutPanier" @click="AjouterAuPanier()">Ajouter au panier</b-btn>
@@ -155,7 +155,6 @@ export default {
     }
   },
   mounted: function() {
-    console.log(this.$route.query.id);
     this.chargeVoyage(this.$route.query.id);
   }
 };
