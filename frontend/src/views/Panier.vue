@@ -4,15 +4,17 @@
       <br>
     </p>
     <div v-for="item in posts" v-bind:key="item" class="ArticlesVoyage">
-      <b-card :title="['Destination : '+item.planeteDestiantion]" :sub-title="[' Planete de départ : '+item.planeteDepart]">
-          <p>Lieu de départ : {{item.lieuDepart}}</p>
-          <p>Lieu de destination : {{item.lieuDestination}}</p>
-          <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
-          <p>Prix : {{item.prix}}</p>
-          <b-button variant="danger" @click="SupprimerDuPanier(item.idCommande)">Supprimer</b-button>
+      <b-card
+        :title="['Destination : '+item.planeteDestiantion]"
+        :sub-title="[' Planete de départ : '+item.planeteDepart]"
+      >
+        <p>Lieu de départ : {{item.lieuDepart}}</p>
+        <p>Lieu de destination : {{item.lieuDestination}}</p>
+        <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
+        <p>Prix : {{item.prix}}</p>
+        <b-button variant="danger" @click="SupprimerDuPanier(item.idCommande)">Supprimer</b-button>
       </b-card>
       <div>
-        
         <br>
       </div>
     </div>
@@ -26,13 +28,9 @@
 
 <script>
 import { AXIOS } from "../components/http-common";
-//import ArticleVoyage from "@/components/ArticleVoyage.vue";
 
 export default {
   name: "listVoyage",
-  components: {
-    //ArticleVoyage
-  },
   data() {
     return {
       result: [],
@@ -47,14 +45,15 @@ export default {
       this.$router.push({ path: `/payment/` });
     },
     SupprimerDuPanier(id) {
+      console.log(id);
       AXIOS.delete(`/removePanier/` + id)
-      .then(response => {
-        window.reload();
-      })
-      .catch(e => {
-        this.errors.push(e);
-      });
-      console.log("Supprimer "+id);
+        .then(response => {
+          // window.reload();
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+      console.log("Supprimer " + id);
     },
     getResultat() {
       var tailleTableau = this.posts.length;
