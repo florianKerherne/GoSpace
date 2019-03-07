@@ -12,6 +12,7 @@
               <h5>{{DestinationDescription}}</h5>
               <h6>Lieu de départ : {{DepartPlanete}} {{DepartNom}}</h6>
               <h6>Date de départ le {{DateDepart}} - Date d'arrivé le {{DateArrive}}</h6>
+              <h6>Durée du voyage : {{tempVoyage}} Années</h6>
             <!--</b-card-text>-->
           </b-card-body>
           <b-row no-gutters>
@@ -59,6 +60,7 @@ export default {
       idLieu: "",
       DateDepart: "",
       DateArrive: "",
+      tempVoyage: 0,
       StatutBtnPanier:"secondary",
       EstAjouterAuPanier:false,
       showDismissibleAlert:false,
@@ -103,6 +105,7 @@ export default {
             varDateArrive.getMonth() +
             "/" +
             varDateArrive.getFullYear();
+          this.tempVoyage = this.dateDiff(varDateDepart,varDateArrive);
           this.ajouterImage();
         })
         .catch(e => {
@@ -133,6 +136,9 @@ export default {
       }
       
     },
+    dateDiff(dateold, datenew){
+      return datenew.getFullYear()-dateold.getFullYear();
+},
     ajouterImage() {
       AXIOS.get(`Photo/`+this.idLieu)
         .then(response => {
