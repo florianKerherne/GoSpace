@@ -3,6 +3,7 @@
     <b-carousel
       id="carousel1"
       style="text-shadow: 1px 1px 2px #333;"
+      controls
       background="#ababab"
       :interval="3000"
       img-width="500"
