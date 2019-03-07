@@ -1,25 +1,5 @@
 <template>
   <div class="ArticleVoyage">
-    <!--<div>
-      <div id="photo"></div>
-      <div id="descriptif">
-        <h3>{{DestinationPlanete}} {{DestinationNom}}</h3>
-        <h5>{{DestinationDescription}}</h5>
-        <h6>Lieu de départ : {{DepartPlanete}} {{DepartNom}}</h6>
-        <h6>Date de départ le {{DateDepart}} - Date d'arrivé le {{DateArrive}}</h6>
-        <p>
-          {{description}}
-          <br>
-        </p>
-      </div>
-    </div>
-    <div id="piedDePage">
-      <h6 class="PlaceRestante">{{nbPlace}} places restantes</h6>
-      <h6 v-if="prixNonPromo>0" class="PrixNonPromo">{{prixNonPromo}} €</h6>
-      <h5 class="PrixArticle">{{prixFinal}} €</h5>
-      <b-btn class="BoutonAjoutPanier" @click="AjouterAuPanier()">Ajouter au panier</b-btn>
-      <b-btn class="BoutonArticle" @click="reserver(this.id)">Réserver</b-btn>
-    </div>-->
       <b-card no-body class="overflow-hidden">
       <b-row no-gutters>
         <b-col md="3">
@@ -42,7 +22,7 @@
               <h4 style="display: inline-block;">Prix <h6 style="display: inline-block;"><s v-if="prixNonPromo">{{prixNonPromo}} €</s></h6><b-badge>{{prixFinal}} €</b-badge></h4>
             </b-col>
             <b-col md="2">
-              <b-btn class="BoutonAjoutPanier" @click="AjouterAuPanier()">Ajouter au panier</b-btn>
+              <b-btn :variant="[StatutBtnPanier]" class="BoutonAjoutPanier" @click="AjouterAuPanier()">Ajouter au panier</b-btn>
             </b-col>
             <b-col md="2">
               <b-btn class="BoutonArticle" @click="accessPayement()">Réserver</b-btn>
@@ -77,6 +57,7 @@ export default {
       idLieu: "",
       DateDepart: "",
       DateArrive: "",
+      StatutBtnPanier:"secondary",
       posts: [],
       errors: []
     };
@@ -94,10 +75,10 @@ export default {
           this.DepartNom = response.data.idLieuDepart.nom;
           this.description = response.data.description;
           if (response.data.promotion > 0) {
-            this.prixNonPromo = response.data.prix;
-            this.prixFinal =
-              response.data.prix -
+            this.prixNonPromo =
+              response.data.prix +
               (response.data.prix * response.data.promotion) / 100;
+            this.prixFinal = response.data.prix;
           } else {
             this.prixFinal = response.data.prix;
           }
@@ -137,6 +118,7 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+        this.StatutBtnPanier="success";
     },
     ajouterImage() {
       AXIOS.get(`Photo/`+this.idLieu)

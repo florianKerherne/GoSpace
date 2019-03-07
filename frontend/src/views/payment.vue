@@ -5,12 +5,9 @@
       <div class="col-md-4">
         <b-form
           accept-charset="UTF-8"
-          action="/"
           class="require-validation"
-          data-cc-on-file="false"
-          data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj"
           id="payment-form"
-          method="post"
+          @submit="onSubmit"
         >
           <b-form-group
             id="gTitulaire"
@@ -78,7 +75,7 @@
             <span class="amount">{{prixFinal}} €</span>
              
           </div>
-            <b-btn class="form-control total btn btn-info" @click="action()" >Finaliser la transaction</b-btn>
+            <b-btn class="form-control total btn btn-info" type="submit" >Finaliser la transaction</b-btn>
         </b-form>
       </div>
       <div class="col-md-4"></div>
@@ -105,7 +102,8 @@ export default {
       posts: [],
       errors: [],
       userId: "123",
-      prixFinal:0
+      prixFinal:0,
+      result:""
     };
   },
   methods: {
@@ -124,6 +122,26 @@ export default {
       console.log("transaction");
       this.redirection();
     },
+    onSubmit(evt) {
+      /*var params = {
+        nom: "",
+        prenom: "",
+        email:"",
+        mdp: "",
+        isAdmin: ""
+      };
+      */AXIOS.post(`/Payment`)
+        .then(response => {
+           //console.log(response.data);
+            //this.utilisteurAuthentifier();
+        })
+        .catch(e => {
+          this.errors.push("error post.");
+          this.posts.push(e);
+        });
+      this.redirection();
+      
+    },
     redirection() {
       //this.$router.push({ path: `/Connexion/${this.userId}` });
       this.$router.push({ path: `/PaymentValider/`, query: { } });
@@ -132,22 +150,42 @@ export default {
       AXIOS.get(`voyage/` + idVoyage)
         .then(response => {
           // JSON responses are automatically parsed.
-          if (response.data.promotion > 0) {
-            this.prixFinal =
-              response.data.prix -
-              (response.data.prix * response.data.promotion) / 100;
-          } else {
-            this.prixFinal = response.data.prix;
-          }
+            this.prixFinal = response.data.prix ;
         })
         .catch(e => {
           this.errors.push(e);
         });
+    },
+    getTotalPanier() {
+      var tailleTableau = this.posts.length;
+      this.prixFinal = 0;
+      var i;
+      for (i = 0; i < tailleTableau; i++) {
+        this.posts.pop();
+      }
+      var prixToTalTemp = 0;
+      this.result.forEach(function(element) {
+        //if(element.id_voyage.prix)
+        prixToTalTemp += element.id_voyage.prix;
+      });
+      this.prixFinal = prixToTalTemp;
+    },
+    chargePrixPanier(){
+      AXIOS.get(`panier/` + 1)
+      .then(response => {
+        this.result = response.data;
+        this.getTotalPanier();
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
     }
   },
   mounted: function() {
     if(this.$route.query.id>0){
       this.chargePrixVoyage(this.$route.query.id);
+    }else{
+      this.chargePrixPanier();
     }
     
   }

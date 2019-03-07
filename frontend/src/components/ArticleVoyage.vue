@@ -92,10 +92,10 @@ export default {
           this.idLieu = response.data.idLieuDestination.id;
           //---Prix
           if (response.data.promotion > 0) {
-            this.prixNonPromo = response.data.prix;
-            this.prixFinal =
-              response.data.prix -
+            this.prixNonPromo =
+              response.data.prix +
               (response.data.prix * response.data.promotion) / 100;
+            this.prixFinal = response.data.prix ;
           } else {
             this.prixFinal = response.data.prix;
           }
