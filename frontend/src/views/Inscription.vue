@@ -58,7 +58,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0">J'accepte les condition d'utilisation</b-form-checkbox>
+        <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0" required>J'accepte les condition d'utilisation</b-form-checkbox>
         <b-button variant="primary" type="submit">Inscription</b-button>
       </b-form>
     </div>

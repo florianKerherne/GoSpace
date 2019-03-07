@@ -2,10 +2,10 @@
   <div>
     <b-card no-body class="overflow-hidden">
       <b-row no-gutters>
-        <b-col md="3">
+        <b-col md="4">
             <b-card-img :id="['PhotoLieu'+idVoyage]" src class="rounded-0"/>
         </b-col>
-        <b-col md="9">
+        <b-col md="7">
           <b-card-body :title="[DestinationPlanete+', '+DestinationNom]">
             <!--<b-card-text>-->
               <h5>{{description}}</h5>

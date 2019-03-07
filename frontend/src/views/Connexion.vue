@@ -83,7 +83,17 @@ export default {
       //alert(JSON.stringify(this.user));
     },
     utilisteurAuthentifier() {
-      localStorage.setItem('user', JSON.stringify(this.user));
+      AXIOS.get(`/findUtilisateur/`+this.user.email)
+        .then(response => {
+           
+            localStorage.setItem('user', JSON.stringify(response.data.id));
+            console.log("id:"+response.data.id+"save:"+localStorage.getItem('user'));
+        })
+        .catch(e => {
+          this.errors.push("Addresse mail ou mot de passe invalide.");
+          this.posts.push(e);
+        });
+      
       window.location = "http://localhost:8080/#/"
     },
     onReset(evt) {

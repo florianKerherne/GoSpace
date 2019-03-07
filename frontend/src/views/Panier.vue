@@ -4,13 +4,17 @@
       <br>
     </p>
     <div v-for="item in posts" v-bind:key="item" class="ArticlesVoyage">
+      <b-card :title="['Destination : '+item.planeteDestiantion]" :sub-title="[' Planete de départ : '+item.planeteDepart]">
+        <b-card-text>
+          <p>Lieu de départ : {{item.lieuDepart}}</p>
+          <p>Lieu de destination : {{item.lieuDestination}}</p>
+          <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
+          <p>Prix : {{item.prix}}</p>
+          <b-button variant="danger" @click="SupprimerDuPanier(item.idCommande)">Supprimer</b-button>
+        </b-card-text>
+      </b-card>
       <div>
-        <p>Planete de départ : {{item.planeteDepart}}</p>
-        <p>Planete de d'arrivé : {{item.planeteArrive}}</p>
-        <p>Lieu de départ : {{item.lieuDepart}}</p>
-        <p>Lieu de destination : {{item.lieuDestination}}</p>
-        <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
-        <p>Prix : {{item.prix}}</p>
+        
         <br>
       </div>
     </div>
@@ -44,6 +48,9 @@ export default {
     PayerPanier() {
       this.$router.push({ path: `/payment/` });
     },
+    SupprimerDuPanier(id) {
+      console.log("Supprimer "+id);
+    },
     getResultat() {
       var tailleTableau = this.posts.length;
       this.prixTotal = 0;
@@ -63,7 +70,8 @@ export default {
           promotion: element.id_voyage.promotion,
           nbPlacesReserves: element.nb_places_reserves,
           dateDebut: element.id_voyage.date_debut,
-          dateFin: element.id_voyage.date_fin
+          dateFin: element.id_voyage.date_fin,
+          idCommande: element.id
         };
         prixToTalTemp += element.id_voyage.prix;
         postsTemp.push(object);
