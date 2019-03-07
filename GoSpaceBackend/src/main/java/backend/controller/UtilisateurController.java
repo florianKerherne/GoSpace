@@ -39,7 +39,7 @@ public class UtilisateurController {
 	}
 	
 	@GetMapping("findUtilisateur/{email}")
-	public ResponseEntity<Integer> getIdUserByEmail(@PathVariable("id") String email) {
+	public ResponseEntity<Integer> getIdUserByEmail(@PathVariable("email") String email) {
 		LOG.info("GET called on getUserById"); 
 		Integer id = utilisateurService.getIdUtilisateurByEmail(email);
 		return new ResponseEntity<Integer>(id, HttpStatus.OK);
