@@ -5,16 +5,12 @@
     </p>
     <div v-for="item in posts" v-bind:key="item" class="ArticlesVoyage">
       <div>
-        <ul>
-          <li>
-            <p>Planete de départ : {{item.planeteDepart}}</p>
-            <p>Planete de d'arrivé : {{item.planeteArrive}}</p>
-            <p>Lieu de départ : {{item.lieuDepart}}</p>
-            <p>Lieu de destination : {{item.lieuDestination}}</p>
-            <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
-            <p>Prix : {{item.prix}}</p>
-          </li>
-        </ul>
+        <p>Planete de départ : {{item.planeteDepart}}</p>
+        <p>Planete de d'arrivé : {{item.planeteArrive}}</p>
+        <p>Lieu de départ : {{item.lieuDepart}}</p>
+        <p>Lieu de destination : {{item.lieuDestination}}</p>
+        <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
+        <p>Prix : {{item.prix}}</p>
         <br>
       </div>
     </div>

@@ -139,6 +139,7 @@ export default {
         if ((await this.userExist()) == false) {
           console.log("creation utilisateur");
           this.createUser();
+          window.location = "http://localhost:8080/#/connexion";
         }
       }
     },

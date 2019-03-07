@@ -26,9 +26,7 @@
     </div>
     <div>
       <p v-if="errors.length">
-        <ul>
-          <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-        </ul>
+          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
       </p>
       <p>{{userId}}</p>
     </div>
@@ -85,7 +83,8 @@ export default {
       //alert(JSON.stringify(this.user));
     },
     utilisteurAuthentifier() {
-      window.location = "http://localhost:8080/#/listVoyage"
+      localStorage.setItem('user', JSON.stringify(this.user));
+      window.location = "http://localhost:8080/#/"
     },
     onReset(evt) {
       evt.preventDefault();
