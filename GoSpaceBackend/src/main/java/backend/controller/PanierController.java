@@ -48,4 +48,10 @@ public class PanierController {
                 return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
+	@PostMapping("Payment")
+	public ResponseEntity<Void> paymentPanier() {
+				LOG.info("GET called on paymentPanier");
+                return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
 }
