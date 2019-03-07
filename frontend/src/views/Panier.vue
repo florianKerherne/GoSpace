@@ -5,13 +5,11 @@
     </p>
     <div v-for="item in posts" v-bind:key="item" class="ArticlesVoyage">
       <b-card :title="['Destination : '+item.planeteDestiantion]" :sub-title="[' Planete de départ : '+item.planeteDepart]">
-        <b-card-text>
           <p>Lieu de départ : {{item.lieuDepart}}</p>
           <p>Lieu de destination : {{item.lieuDestination}}</p>
           <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
           <p>Prix : {{item.prix}}</p>
           <b-button variant="danger" @click="SupprimerDuPanier(item.idCommande)">Supprimer</b-button>
-        </b-card-text>
       </b-card>
       <div>
         
@@ -49,6 +47,13 @@ export default {
       this.$router.push({ path: `/payment/` });
     },
     SupprimerDuPanier(id) {
+      AXIOS.delete(`/removePanier/` + id)
+      .then(response => {
+        window.reload();
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
       console.log("Supprimer "+id);
     },
     getResultat() {
