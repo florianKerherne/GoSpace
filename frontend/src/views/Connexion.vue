@@ -25,9 +25,9 @@
       </b-form>
     </div>
     <div>
-      <p v-if="errors.length">
+      <div v-if="errors.length">
           <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-      </p>
+      </div>
       <p>{{userId}}</p>
     </div>
   </div>
@@ -102,13 +102,13 @@ export default {
 <style scoped>
 #co {
   padding: 30px;
-  color: #eb0606;
 }
 #app {
+  padding: 30px;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #eb0606;
+  /*text-align: center;
+  color: #eb0606;*/
 }
 </style>

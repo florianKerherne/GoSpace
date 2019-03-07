@@ -15,10 +15,10 @@
       </b-form-group>
       <b-button variant="primary" @click="search()">Rechercher</b-button>
     </b-form>
-    <p>vos voyage :
+    <p>vos voyages :
       <br>
     </p>
-    <h3>----</h3>
+    <!--<h3>----</h3>-->
     <b-list-group></b-list-group>
     <!--<div>
       <b-row v-for="item in result" v-bind:key="item">
@@ -26,7 +26,7 @@
         </b-row>
     </div>-->
     <ul id="example-1">
-      <li v-for="item in result" v-bind:key="item">
+      <li v-for="item in result" v-bind:key="item" style="list-style-type: none;" >
         <ArticleVoyage :idArticle=item.id></ArticleVoyage>
         <br>
       </li>

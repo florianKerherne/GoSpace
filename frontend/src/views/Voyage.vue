@@ -58,6 +58,7 @@ export default {
       DateDepart: "",
       DateArrive: "",
       StatutBtnPanier:"secondary",
+      EstAjouterAuPanier:false,
       posts: [],
       errors: []
     };
@@ -106,7 +107,9 @@ export default {
         });
     },
     AjouterAuPanier() {
-      var params = {
+      if(this.EstAjouterAuPanier==false){
+        this.EstAjouterAuPanier=true;
+        var params = {
         idVoyage: this.$route.query.id,
         idUtilisateur: 1,
         nbPlacesReserves: 1
@@ -119,6 +122,8 @@ export default {
           this.errors.push(e);
         });
         this.StatutBtnPanier="success";
+      }
+      
     },
     ajouterImage() {
       AXIOS.get(`Photo/`+this.idLieu)

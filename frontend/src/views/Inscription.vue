@@ -159,7 +159,6 @@ export default {
 <style scoped>
 #co {
   padding: 30px;
-  color: #eb0606;
 }
 #app {
   padding: 30px;
