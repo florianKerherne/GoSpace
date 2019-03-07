@@ -10,5 +10,5 @@ public interface IPanierService {
 	List<Panier> getPanierByIdPersonne(Integer Id);
 	
 	boolean addVoyageToPanier(PanierDTO panier);
-
+	void deleteVoyageFromPanier(int Id);
 }

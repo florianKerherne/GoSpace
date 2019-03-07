@@ -38,7 +38,7 @@ public class UtilisateurController {
 		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.OK);
 	}
 	
-	@GetMapping("utilisateur/{email}")
+	@GetMapping("findUtilisateur/{email}")
 	public ResponseEntity<Integer> getIdUserByEmail(@PathVariable("id") String email) {
 		LOG.info("GET called on getUserById"); 
 		Integer id = utilisateurService.getIdUtilisateurByEmail(email);
