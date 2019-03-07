@@ -1,18 +1,26 @@
 <template>
   <div class="Panier">
-    <p>vos voyage(s) :
+    <p>VOS VOYAGE(S) :
       <br>
     </p>
-
     <div v-for="item in posts" v-bind:key="item" class="ArticlesVoyage">
       <div>
-        <p>{{item.planeteDepart}}</p>
-        <p>{{item.planeteArrive}}</p>
+        <ul>
+          <li>
+            <p>Planete de départ : {{item.planeteDepart}}</p>
+            <p>Planete de d'arrivé : {{item.planeteArrive}}</p>
+            <p>Lieu de départ : {{item.lieuDepart}}</p>
+            <p>Lieu de destination : {{item.lieuDestination}}</p>
+            <p>Nombres de places Réservés : {{item.nbPlacesReserves}}</p>
+            <p>Prix : {{item.prix}}</p>
+          </li>
+        </ul>
+        <br>
       </div>
     </div>
     <div id>
       <h3>Coût total du panier : {{this.prixTotal}} $</h3>
-      <b-btn class="BoutonArticle" @click="accessVoyage()">Payement</b-btn>
+      <b-btn class="BoutonArticle" @click="PayerPanier()">Payment</b-btn>
     </div>
   </div>
 </template>
@@ -37,7 +45,9 @@ export default {
   },
 
   methods: {
-    accessVoyage() {},
+    PayerPanier() {
+      this.$router.push({ path: `/payment/` });
+    },
     getResultat() {
       var tailleTableau = this.posts.length;
       this.prixTotal = 0;
@@ -62,7 +72,7 @@ export default {
         prixToTalTemp += element.id_voyage.prix;
         postsTemp.push(object);
       });
-      this.posts = this.postsTemp;
+      this.posts = postsTemp;
       this.prixTotal = prixToTalTemp;
     }
   },
@@ -93,9 +103,8 @@ export default {
 }
 
 .BoutonArticle {
-  position: absolute;
+  position: center;
   text-align: center;
-  margin-left: 50%;
 }
 
 #photo {
