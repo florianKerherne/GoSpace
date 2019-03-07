@@ -48,8 +48,7 @@ public class PanierService implements IPanierService{
 
 	@Override
 	public void deleteVoyageFromPanier(int Id) {
-		Voyage voyage = voyageRepository.findById(Id);
-		panierRepository.delete(null);
+		panierRepository.delete(panierRepository.findById(Id));
 	}
 
 }

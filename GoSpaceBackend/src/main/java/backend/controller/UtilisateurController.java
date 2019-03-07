@@ -40,7 +40,7 @@ public class UtilisateurController {
 	
 	@GetMapping("findUtilisateur/{email}")
 	public ResponseEntity<Integer> getIdUserByEmail(@PathVariable("email") String email) {
-		LOG.info("GET called on getUserById"); 
+		LOG.info("GET called on getIdUserByEmail"); 
 		Integer id = utilisateurService.getIdUtilisateurByEmail(email);
 		return new ResponseEntity<Integer>(id, HttpStatus.OK);
 	}

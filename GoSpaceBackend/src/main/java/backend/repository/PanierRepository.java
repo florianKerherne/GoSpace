@@ -12,5 +12,6 @@ import backend.model.Utilisateur;
 public interface PanierRepository extends CrudRepository<Panier, Long> {
 
 	List<Panier> findByIdUtilisateur(@Param("id") Utilisateur id);
+	Panier findById(@Param("id") Integer id);
 	
 }
