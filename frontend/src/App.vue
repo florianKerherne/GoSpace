@@ -8,8 +8,13 @@
             <b-nav-item to="/">Acceuil</b-nav-item>
             <b-nav-item to="/listVoyage">Liste des voyages</b-nav-item>
             <b-nav-item to="/panier">Mon Panier</b-nav-item>
-            <b-nav-item to="/connexion">Connexion</b-nav-item>
-            <b-nav-item to="/inscription">Inscription</b-nav-item>
+            <b-nav-item to="/connexion" v-if="userConnected == false">Connexion</b-nav-item>
+            <b-nav-item to="/inscription" v-if="userConnected == false">Inscription</b-nav-item>
+            <b-nav-item
+              @click="utilisteurDeconnexion()"
+              to="/"
+              v-if="userConnected == true"
+            >Déconnexion</b-nav-item>
           </ul>
         </b-navbar-nav>
       </b-collapse>
@@ -17,6 +22,37 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  name: "listVoyage",
+  data() {
+    return {
+      userConnected: true
+    };
+  },
+  methods: {
+    utilisteurDeconnexion() {
+      console.log("deco");
+      localStorage.removeItem("user");
+      this.userConnected = false;
+    },
+    utilisteurConnexion() {
+      if (localStorage.getItem("user")) {
+        this.userConnected = true;
+      } else {
+        this.userConnected = false;
+      }
+    }
+  },
+  mounted: function() {
+    if (localStorage.getItem("user")) {
+      this.userConnected = true;
+    }
+  }
+};
+</script>
+
 
 <style>
 #app {

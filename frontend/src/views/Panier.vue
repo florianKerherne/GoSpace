@@ -20,7 +20,7 @@
     </div>
     <div id>
       <h3>Coût total du panier : {{this.prixTotal}} $</h3>
-      <b-btn class="BoutonArticle" @click="PayerPanier()">Payment</b-btn>
+      <b-btn class="BoutonArticle" v-if="!(prixTotal == 0)" @click="PayerPanier()">Payment</b-btn>
     </div>
   </div>
 </template>
@@ -46,9 +46,10 @@ export default {
     },
     SupprimerDuPanier(id) {
       console.log(id);
-      AXIOS.delete(`/removePanier/` + id)
+      AXIOS.get(`/removePanier/` + id)
         .then(response => {
-          // window.reload();
+          console.log(response);
+          window.location.reload();
         })
         .catch(e => {
           this.errors.push(e);
@@ -85,15 +86,15 @@ export default {
     }
   },
   mounted: function() {
-    if(localStorage.getItem('user')){
-      AXIOS.get(`panier/` + localStorage.getItem('user'))
-      .then(response => {
-        this.result = response.data;
-        this.getResultat();
-      })
-      .catch(e => {
-        this.errors.push(e);
-      });
+    if (localStorage.getItem("user")) {
+      AXIOS.get(`panier/` + localStorage.getItem("user"))
+        .then(response => {
+          this.result = response.data;
+          this.getResultat();
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
     }
   }
 };

@@ -9,10 +9,7 @@
           id="payment-form"
           @submit="onSubmit"
         >
-          <b-form-group
-            id="gTitulaire"
-            label="Titulaire de la carte"
-          >
+          <b-form-group id="gTitulaire" label="Titulaire de la carte">
             <b-form-input
               id="titulaire"
               type="text"
@@ -22,10 +19,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group
-            id="gNumero"
-            label="Numéro de la carte"
-          >
+          <b-form-group id="gNumero" label="Numéro de la carte">
             <b-form-input
               id="Numero"
               type="number"
@@ -34,24 +28,12 @@
               placeholder="Entrer le numéro"
             ></b-form-input>
           </b-form-group>
-          
-          <b-form-group
-            id="gCvc"
-            label="CVC"
-          >
-            <b-form-input
-              id="Cvc"
-              type="number"
-              v-model="card.cvc"
-              required
-              placeholder="ex. 311"
-            ></b-form-input>
+
+          <b-form-group id="gCvc" label="CVC">
+            <b-form-input id="Cvc" type="number" v-model="card.cvc" required placeholder="ex. 311"></b-form-input>
           </b-form-group>
 
-          <b-form-group
-            id="gExp"
-            label="Expiration"
-          >
+          <b-form-group id="gExp" label="Expiration">
             <b-form-input
               id="MoisExp"
               type="number"
@@ -59,7 +41,7 @@
               required
               placeholder="MM"
             ></b-form-input>
-            
+
             <b-form-input
               id="AnneeExp"
               type="number"
@@ -73,9 +55,8 @@
           <div class="form-control total btn btn-info">
             Total:
             <span class="amount">{{prixFinal}} €</span>
-             
           </div>
-            <b-btn class="form-control total btn btn-info" type="submit" >Finaliser la transaction</b-btn>
+          <b-btn class="form-control total btn btn-info" type="submit">Finaliser la transaction</b-btn>
         </b-form>
       </div>
       <div class="col-md-4"></div>
@@ -102,8 +83,8 @@ export default {
       posts: [],
       errors: [],
       userId: "123",
-      prixFinal:0,
-      result:""
+      prixFinal: 0,
+      result: ""
     };
   },
   methods: {
@@ -118,39 +99,31 @@ export default {
           this.errors.push(e);
         });
     },
-    action(){
+    action() {
       console.log("transaction");
       this.redirection();
     },
     onSubmit(evt) {
-      /*var params = {
-        nom: "",
-        prenom: "",
-        email:"",
-        mdp: "",
-        isAdmin: ""
-      };
-      */AXIOS.post(`/Payment`)
+      AXIOS.post(`/Payment`)
         .then(response => {
-           //console.log(response.data);
-            //this.utilisteurAuthentifier();
+          //console.log(response.data);
+          //this.utilisteurAuthentifier();
         })
         .catch(e => {
           this.errors.push("error post.");
           this.posts.push(e);
         });
       this.redirection();
-      
     },
     redirection() {
       //this.$router.push({ path: `/Connexion/${this.userId}` });
-      this.$router.push({ path: `/PaymentValider/`, query: { } });
+      this.$router.push({ path: `/PaymentValider/`, query: {} });
     },
     chargePrixVoyage(idVoyage) {
       AXIOS.get(`voyage/` + idVoyage)
         .then(response => {
           // JSON responses are automatically parsed.
-            this.prixFinal = response.data.prix ;
+          this.prixFinal = response.data.prix;
         })
         .catch(e => {
           this.errors.push(e);
@@ -170,25 +143,24 @@ export default {
       });
       this.prixFinal = prixToTalTemp;
     },
-    chargePrixPanier(id){
+    chargePrixPanier(id) {
       AXIOS.get(`panier/` + id)
-      .then(response => {
-        this.result = response.data;
-        this.getTotalPanier();
-      })
-      .catch(e => {
-        this.errors.push(e);
-      });
+        .then(response => {
+          this.result = response.data;
+          this.getTotalPanier();
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
     }
   },
   mounted: function() {
-    console.log("save:"+localStorage.getItem('user'));
-    if(this.$route.query.id>0){
+    console.log("save:" + localStorage.getItem("user"));
+    if (this.$route.query.id > 0) {
       this.chargePrixVoyage(this.$route.query.id);
-    }else if(localStorage.getItem('user')){
-      this.chargePrixPanier(localStorage.getItem('user'));
+    } else if (localStorage.getItem("user")) {
+      this.chargePrixPanier(localStorage.getItem("user"));
     }
-    
   }
 };
 </script>

@@ -55,7 +55,7 @@ public class PanierController {
                 return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("removePanier/{id}")
+	@GetMapping("removePanier/{id}")
 	public ResponseEntity<Void> deleteVoyageFromPanier(@PathVariable("id") Integer id) {
 		LOG.info("GET called on deleteVoyageFromPanier");  
 		panierService.deleteVoyageFromPanier(id);
